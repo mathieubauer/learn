@@ -1,0 +1,51 @@
+# ampli_idee_index:
+#     path:     /
+#     defaults: { _controller: "dswAmpliBundle:Idee:index" }
+#     methods:  GET
+
+ampli_idee_public:
+    path:     /{id}
+    defaults: { _controller: "dswAmpliBundle:Idee:public" }
+    methods:  [GET, POST]
+
+ampli_idee_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswAmpliBundle:Idee:show" }
+    methods:  GET
+
+ampli_idee_new:
+    path:     /new/{id}
+    defaults: { _controller: "dswAmpliBundle:Idee:new" }
+    methods:  [GET, POST]
+
+ampli_idee_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswAmpliBundle:Idee:edit" }
+    methods:  [GET, POST]
+
+ampli_idee_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswAmpliBundle:Idee:delete" }
+    methods:  [GET, POST, DELETE]
+    
+ampli_idee_print:
+    path:     /{id}/print
+    defaults: { _controller: "dswAmpliBundle:Idee:print" }
+    methods:  GET
+    
+    
+ampli_idee_edit_user:
+    path:     /{id}/edit_user
+    defaults: { _controller: "dswAmpliBundle:Idee:edit_user" }
+    methods:  [GET, POST]
+    
+ampli_idee_delete_user:
+    path:     /{id}/delete_user
+    defaults: { _controller: "dswAmpliBundle:Idee:delete_user" }
+    methods:  [GET, POST, DELETE]
+    
+    
+ampli_idee_public_connect:
+    path:     /connect/{id}
+    defaults: { _controller: "dswAmpliBundle:Idee:connect" }
+    methods:  [GET, POST]

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{% block title %}Ampli by D-Sides{% endblock %}</title>
+
+{% block opengraph %}
+   
+    <meta name="description" content="Parce que les dynamiques collectives retombent trop souvent dès la fin des ateliers, nous avons créé un outil d'idéation, de capitalisation d'idées et de propulsion de projets !" />
+    
+    {% if idee is defined %}
+    
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ampli - {{ idee.titre }}" />
+    <meta property="og:description" content="{{ idee.description }}" />
+    <meta property="og:url" content="http://ampli.live/idee/{{ idee.id }}" />
+    <meta property="og:image" content="{{ asset('/uploads/img/' ~ idee.imgProjet) | imagine_filter('ideas_wall') }}" />
+    <meta property="og:site_name" content="ampli" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="{{ idee.description }}" />
+    <meta name="twitter:title" content="Ampli - {{ idee.titre }}" />
+    <meta name="twitter:site" content="@dsideslab" />
+    <meta name="twitter:creator" content="@dsideslab" />
+    
+    {% else %}
+    
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ampli by D-Sides" />
+    <meta property="og:description" content="Parce que les dynamiques collectives retombent trop souvent dès la fin des ateliers, nous avons créé un outil d'idéation, de capitalisation d'idées et de propulsion de projets !" />
+    <meta property="og:url" content="http://ampli.live/" />
+    <meta property="og:image" content="http://ampli.live/web/bundles/dswampli/img/chaises.jpg" />
+    <meta property="og:site_name" content="ampli" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="Parce que les dynamiques collectives retombent trop souvent dès la fin des ateliers, nous avons créé un outil d'idéation, de capitalisation d'idées et de propulsion de projets !" />
+    <meta name="twitter:title" content="Ampli by D-Sides" />
+    <meta name="twitter:site" content="@dsideslab" />
+    <meta name="twitter:creator" content="@dsideslab" />
+    
+    {% endif %}
+    
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    
+    <link rel="stylesheet" href="{{ asset('bundles/dswampli/css/progressbar.css') }}" type="text/css" />
+    
+    <link rel="stylesheet" href="{{ asset('bundles/dswampli/css/main.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/dswampli/css/style.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/dswampli/css/design.css') }}" type="text/css" />
+    
+    <link rel="icon" type="image/png" href="{{ asset('bundles/dswampli/img/favicon.png') }}" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i" rel="stylesheet">
+    
+    <script src="https://use.fontawesome.com/19d03e082d.js"></script>
+    
+{% endblock %}
+</head>
+
+<body>
+    
+    {% block nav %}
+    {% endblock %}
+
+    <div id="content">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    {% block footer %}
+    {% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    
+    <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+    
+    <!--
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('bundles/dswampli/js/jqueryui-touch-punch.js') }}"></script> 
+    <script src="{{ asset('bundles/dswampli/js/jquery-draggable-touch.js') }}"></script> 
+    -->
+    
+    <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+    
+    <script src="{{ asset('bundles/dswampli/js/main.js') }}"></script>
+    
+    <script src="{{ asset('bundles/dswampli/js/grille.js') }}"></script>
+    <script src="{{ asset('bundles/dswampli/js/addAnswer.js') }}"></script>
+    <script src="{{ asset('bundles/dswampli/js/coeurs.js') }}"></script>
+    <script src="{{ asset('bundles/dswampli/js/selection.js') }}"></script>
+    <script src="{{ asset('bundles/dswampli/js/progressbar.js') }}"></script>
+    
+    <!--
+    <script src="{{ asset('bundles/dswampli/js/jquery.transform2d.js') }}"></script>
+    <script src="{{ asset('bundles/dswampli/js/jquery.jTinder.js') }}"></script>
+    -->
+    
+    <!--
+    {% javascripts 'bundles/ocplatform/js/*' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    -->
+
+{% endblock %}
+
+</body>
+</html>

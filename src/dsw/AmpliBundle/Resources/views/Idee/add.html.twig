@@ -1,0 +1,32 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Proposez vos idées !{% endblock %}
+{% block dsw_ampli_jumbotron %}<p>{{ espace.titre }}</p><h1>Proposez vos idées !</h1>{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container mt-5">
+    
+    {{ form_start(form) }}
+    
+        <div class="row">
+        <div class="mb-3 col-md-4">{{ form_widget(form.categorie) }}</div>
+        </div>
+        
+        <div class="mb-3">{{ form_widget(form.titre) }}</div>
+    
+        <div class="mb-3">{{ form_widget(form.description) }}</div>
+    
+    <input type="submit" value="Proposer !" class="btn btn-primary" />
+    
+    {{ form_end(form) }}
+    
+    </div>
+    
+<div class="jumbotron jumbotron-fluid mt-5 mb-0 row">
+<div class="container">
+<p>Vous avez terminé ?</p>
+<a class="btn btn-primary mb-3" href="{{ path('dsw_ampli_vote', {'id': espace.id}) }}">Voir les idées</a>
+<a class="btn btn-primary mb-3" href="{{ path('dsw_ampli_viewEspace', {'id': espace.id}) }}">Retour à l'accueil</a>
+</div> 
+</div>
+
+{% endblock %}

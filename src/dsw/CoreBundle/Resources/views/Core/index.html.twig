@@ -1,0 +1,27 @@
+{# On utilise ici le layout général, qui se situe dans ce même CoreBundle maintenant #}
+{% extends "dswCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Page d'accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+  
+    <div class="landing_background">
+    <div class="container py-5">
+
+        <h1 class="display-3">Bienvenue {{ app.user.username }}</h1>
+
+        {# On affiche tous les messages flash dont le nom est « info » #}
+        {% for message in app.session.flashbag.get('info') %}
+        <div class="alert alert-info">Message flash : {{ message }}</div>
+        {% endfor %}
+        
+        <p>Page d'accueil quand l'utilisateur est connecté</p>
+        <p>Affiche la liste des espaces ou directement l'espace unique</p>
+        <a class="btn btn-primary" href="{{ path('dsw_ampli_viewEspace', {'id': 1}) }}">Aller à l'espace démo</a>
+        
+    </div>
+    </div>
+
+{% endblock %}

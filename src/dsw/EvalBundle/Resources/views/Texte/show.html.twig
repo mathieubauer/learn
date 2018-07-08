@@ -1,0 +1,34 @@
+{% extends "dswEvalBundle::layout.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+{% block dsw_eval_content %}
+   
+    <h1>Texte</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ texte.id }}</td>
+            </tr>
+            <tr>
+                <th>Reponse</th>
+                <td>{{ texte.reponse }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('eval_texte_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('eval_texte_edit', { 'id': texte.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    
+{% endblock %}

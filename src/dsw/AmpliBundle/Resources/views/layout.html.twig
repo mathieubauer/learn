@@ -1,0 +1,104 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block nav %}
+<header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navbar-toggleable-md d-print-none">
+
+{% if espace.id is defined %}
+<a class="navbar-brand" href="{{ path('dsw_ampli_homepage', {'id': espace.id}) }}">Ampli by D-Sides</a>
+{% elseif idee.espace.id is defined %}
+<a class="navbar-brand" href="{{ path('dsw_ampli_homepage', {'id': idee.espace.id}) }}">Ampli by D-Sides</a>
+{% else %}
+<a class="navbar-brand" href="{{ path('dsw_ampli_landing') }}">Ampli by D-Sides</a>
+{% endif %}
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa fa-user-circle"></i>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">   
+        
+        {% if espace.id is defined %}
+        <li class="nav-item"><a class="nav-link" href="{{ path('dsw_ampli_homepage', {'id': espace.id}) }}">Accueil</a></li>
+        {% elseif idee.espace.id is defined %}
+        <li class="nav-item"><a class="nav-link" href="{{ path('dsw_ampli_homepage', {'id': idee.espace.id}) }}">Accueil</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{{ path('dsw_ampli_landing') }}">Accueil</a></li>
+        {% endif %}
+            
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+           
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle"></i> {{ app.user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('dsw_user_view', {'id': app.user.id}) }}">Mon compte</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="dropdown-item" href="{{ path('dsw_ampli_admin') }}">Administration</a>
+                    {% endif %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                </div>
+            </li>
+           
+        {% else %}
+           
+            <li class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+            
+        {% endif %}
+        
+    </ul>
+</div>
+</nav>
+
+</header>
+{% endblock %}
+
+{% block body %}
+  
+    {# Commun à tout dswAmpliBundle #}
+    <div class="jumbotron jumbotron-fluid text-center mb-0 jumbo_ampli">
+    <div class="container">
+    {% block dsw_ampli_jumbotron %}
+    <h1>L'Ampli</h1>
+    <p>Ce projet est en construction !</p>
+    {% endblock %}
+    </div>
+    </div>
+    
+    {# Pour l'animateur #}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {% if espace is defined %}
+        {% if app.user == espace.animateur %}
+        <div class="jumbotron jumbotron-fluid text-center mb-0 p-1 bg-warning">
+        <div class="container">
+        <a href="{{ path('dsw_ampli_espace_animateur', {'id': espace.id}) }}" class="hidden_link cliquable">Espace animateur</a>
+        </div>
+        </div>
+        {% endif %}
+    {% endif %}
+    {% endif %}
+    
+    <div class="container-fluid">
+    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+    {% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible fade show alert-{{ key }} mt-3">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    </div>
+
+    {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+    {% block dsw_ampli_content %}
+    {% endblock %}
+
+{% endblock %}

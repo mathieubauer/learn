@@ -1,0 +1,32 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>Attempt</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ attempt.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('quiz_attempt_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('quiz_attempt_edit', { 'id': attempt.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    
+</div>
+{% endblock %}

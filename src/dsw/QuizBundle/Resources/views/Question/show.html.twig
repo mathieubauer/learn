@@ -1,0 +1,32 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>{{ question.questionnaire.titre }}</h1>
+    <h3>{{ question.intitule }}</h3>
+    
+    {% for answer in question.answers %}
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="mr-auto">{{ answer.answer }}</span>
+            <span class="ml-3">{{ answer.score }}</span>
+            <span class="ml-3">{{ answer.axe }}</span>
+        </div>
+        <hr class="hr_thin">
+    {% endfor %}
+    
+    
+    <a href="{{ path('quiz_question_edit', { 'id': question.id }) }}" class="btn btn-primary mt-3">Modifier la question</a>
+    
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Supprimer la question" class="btn btn-tertiary mt-3">
+    {{ form_end(delete_form) }}
+
+    <!-- <a href="{{ path('quiz_question_index') }}" class="btn btn-secondary mt-3">Retour à la liste des réponses</a> -->
+    
+    <a href="{{ path('quiz_questionnaire_show', { 'id': question.questionnaire.id }) }}" class="btn btn-secondary mt-3">Retour au questionnaire</a>
+    
+    <a href="{{ path('quiz_question_questionnaire_new', { 'id': question.questionnaire.id }) }}" class="btn btn-secondary mt-3">Ajouter une question</a>
+        
+</div>
+{% endblock %}

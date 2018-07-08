@@ -1,0 +1,16 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+  
+    <div class="col-md-8 mx-auto">
+   
+        <h1>{{ questionnaire.titre }}</h1>
+        <div>{{ questionnaire.intro|nl2br }}</div>
+        
+        <a href="{{ path('dsw_quiz_question_play', {'id': premiere.id}) }}" class="btn btn-primary my-3">Démarrer !</a>
+    
+    </div>
+    
+</div>
+{% endblock %}

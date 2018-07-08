@@ -1,0 +1,24 @@
+ampli_categorie_index:
+    path:     /
+    defaults: { _controller: "dswAmpliBundle:Categorie:index" }
+    methods:  GET
+
+ampli_categorie_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswAmpliBundle:Categorie:show" }
+    methods:  GET
+
+ampli_categorie_new:
+    path:     /new
+    defaults: { _controller: "dswAmpliBundle:Categorie:new" }
+    methods:  [GET, POST]
+
+ampli_categorie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswAmpliBundle:Categorie:edit" }
+    methods:  [GET, POST]
+
+ampli_categorie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswAmpliBundle:Categorie:delete" }
+    methods:  DELETE

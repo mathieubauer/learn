@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Records list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Points</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for record in records %}
+            <tr>
+                <td><a href="{{ path('eval_record_show', { 'id': record.id }) }}">{{ record.id }}</a></td>
+                <td>{{ record.points }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('eval_record_show', { 'id': record.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('eval_record_edit', { 'id': record.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('eval_record_new') }}">Create a new record</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - {{ course.name }}{% endblock %}
+{% block dsw_learn_content %}
+    
+    {% if course.modules|length == 1 %}
+    {# Affiche le module unique #}
+    
+        <h1>{{ course.modules[0].name }}</h1>
+        
+        {% for unit in course.modules[0].units %}
+            <hr>
+            <h3>{{ unit.name }}</h3>
+            {{ unit.content|raw }}
+        {% endfor %}
+    
+    {% else %}
+    {# Affiche le choix de module #}
+    
+        <h1>{{ course.name }}</h1>
+        <h3>Choix du module</h3>
+        
+        <div class="row">
+        {% for module in course.modules %}
+          
+            <div class="col-md-3">
+            <div class="card">
+            <div class="card-body">
+                {{ module.name }}
+            </div>
+            </div>
+            </div>
+           
+            
+        {% endfor %} 
+        </div>
+        
+    
+    {% endif %}
+
+{% endblock %}

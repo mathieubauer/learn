@@ -1,0 +1,9 @@
+learn_admin_index:
+    path:     /
+    defaults: { _controller: "dswLearnBundle:Admin:index" }
+    methods:  GET
+    
+learn_admin_config:
+    path:     /config
+    defaults: { _controller: "dswLearnBundle:Admin:config" }
+    methods:  [GET, POST]

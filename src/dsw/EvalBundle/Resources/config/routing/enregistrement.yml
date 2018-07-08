@@ -1,0 +1,24 @@
+eval_enregistrement_index:
+    path:     /
+    defaults: { _controller: "dswEvalBundle:Enregistrement:index" }
+    methods:  GET
+
+eval_enregistrement_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswEvalBundle:Enregistrement:show" }
+    methods:  GET
+
+eval_enregistrement_new:
+    path:     /new
+    defaults: { _controller: "dswEvalBundle:Enregistrement:new" }
+    methods:  [GET, POST]
+
+eval_enregistrement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswEvalBundle:Enregistrement:edit" }
+    methods:  [GET, POST]
+
+eval_enregistrement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswEvalBundle:Enregistrement:delete" }
+    methods:  DELETE

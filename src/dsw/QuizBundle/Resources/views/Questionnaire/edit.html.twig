@@ -1,0 +1,20 @@
+{% extends "dswQuizBundle::layout.html.twig" %}
+
+{% block dsw_quiz_content %}
+<div class="container my-5">
+   
+    <h1>Édition de questionnaire</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Éditer" class="btn btn-primary mt-3" />
+    {{ form_end(edit_form) }}
+
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Supprimer" class="btn btn-tertiary mt-3">
+    {{ form_end(delete_form) }}
+    
+    <a href="{{ path('quiz_questionnaire_index') }}" class="btn btn-secondary mt-3">Retour aux questionnaires</a>
+    
+</div>
+{% endblock %}

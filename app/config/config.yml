@@ -1,0 +1,181 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@dswCoreBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+    images_directory: '%kernel.project_dir%/web/bundles/dswlearn/img'
+
+framework:
+    #esi: ~
+    translator: { fallbacks: ['%locale%'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.project_dir%/app/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    session:
+        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
+        # - bootstrap_4_layout.html.twig
+        # - 'form/fields.html.twig'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        mapping_types:
+            enum: string
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.project_dir%/var/data/data.sqlite"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: '%mailer_transport%'
+    auth_mode: "%mailer_auth_mode%"
+    host: '%mailer_host%'
+    encryption: "%mailer_encryption%"
+    port:      "%mailer_port%"
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    spool: { type: memory }
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+
+fos_user:
+    db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    firewall_name: fos_user                  # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:    dsw\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "Mathieu Bauer"
+    registration:
+        form:
+            type: dsw\UserBundle\Form\Type\RegistrationFormType
+    profile:
+        form:
+            type: dsw\UserBundle\Form\Type\ProfileFormType
+        
+# assetic:
+#     debug:          '%kernel.debug%'
+#     use_controller: '%kernel.debug%'
+#     bundles: []
+#     filters:
+#         cssrewrite: ~
+#         jsqueeze:   ~
+#         scssphp:
+#             formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+
+liip_imagine:
+
+    # configure resolvers
+    resolvers:
+        # setup the default resolver
+        default:
+            # use the default web path
+            web_path: ~
+            
+        # profile_photos:
+        #     web_path:
+        #         web_root: "%kernel.root_dir%/../web"
+        #         cache_prefix: "media/cache"
+    
+    # loaders
+    # loaders:
+    #     default:
+    #         filesystem:
+    #             data_root:
+    #                 - '%kernel.root_dir%/../web/'
+    #                 - '%liip_imagine_web_root%'
+
+    # your filter sets are defined here
+    filter_sets:
+
+        # use the default cache configuration
+        cache: ~
+        
+        # the name of the "filter set"
+        ideas_wall:
+
+            # adjust the image quality to 75%
+            # quality: 75
+            
+            # cache: profile_photos
+
+            # list of transformations to apply (the "filters")
+            filters:
+                relative_resize:
+                    widen: 600
+                    
+        idea_show:
+            filters:
+                relative_resize:
+                    widen: 1000
+                    
+        equipe:
+            filters:
+                relative_resize:
+                    widen: 400
+                    
+        full_screen:
+            filters:
+                relative_resize:
+                    widen: 1920
+                    
+fos_ck_editor:
+    configs:
+        admin_config:
+            # toolbar: full
+            # toolbar: standard
+            # toolbar: basic
+            toolbar: [ ["Bold", "Italic", "Underline", "-", "NumberedList", "BulletedList", "-", "JustifyLeft", 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Link', 'Unlink', 'Image'], "/", ["Format", "Font", 'FontSize', 'TextColor', 'BGColor'], "/", ["Source", "Maximize"] ]
+            # uiColor:                "#000000"
+            # filebrowserUploadRoute: "my_route"
+            # extraPlugins:           "wordcount"
+            # removePlugins: 'elementspath'
+            # toolbarCanCollapse: true
+        user_config:
+            toolbar: [ ["Bold", "Italic", "Underline", "-", "NumberedList", "BulletedList", 'Outdent', 'Indent', "-", "JustifyLeft", 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Link', 'Unlink', 'Image', "-", "Format", 'FontSize', "-", "Source", "Maximize"] ]
+            removePlugins: 'elementspath'
+            uiColor: "#66AB16"

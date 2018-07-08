@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>An Error Occurred: {{ status_text }}</title>
+  </head>
+  <body>
+    <h1>Oups ! Une erreur</h1>
+    <h2>Le serveur a renvoyé les informations suivantes : "{{ status_code }} {{ status_text }}".</h2>
+
+    <div>
+       <p>Mais n'hésitez pas à nous prévenir du problème !</p>
+       <p>Le mieux, c'est sans doute de revenir à la page d'accueil <a href="{{ path('dsw_core_home') }}">Retour</a> </p>
+       
+    </div>
+  </body>
+</html>

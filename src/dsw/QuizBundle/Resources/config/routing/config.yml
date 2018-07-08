@@ -1,0 +1,24 @@
+quiz_config_index:
+    path:     /
+    defaults: { _controller: "dswQuizBundle:Config:index" }
+    methods:  GET
+
+quiz_config_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswQuizBundle:Config:show" }
+    methods:  GET
+
+quiz_config_new:
+    path:     /new
+    defaults: { _controller: "dswQuizBundle:Config:new" }
+    methods:  [GET, POST]
+
+quiz_config_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswQuizBundle:Config:edit" }
+    methods:  [GET, POST]
+
+quiz_config_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswQuizBundle:Config:delete" }
+    methods:  DELETE

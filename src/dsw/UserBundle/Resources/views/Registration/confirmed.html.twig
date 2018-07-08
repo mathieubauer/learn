@@ -1,0 +1,47 @@
+{% extends "dswUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}
+    {{ parent() }} - Des idées aux projets
+{% endblock %}
+
+{% block jumbo_ampli %}
+{% endblock %}
+
+{% block fos_user_content %}
+<div class="container my-5">
+  
+    <div class="row mt-5">
+    <div class="col-lg-5 col-md-8 mx-auto mt-3">
+    <div class="card">
+        
+        <img class="card-img img-fluid cover_300 pos_a" src="{{ asset('bundles/dswampli/img/wiredAmpli.png') }}" alt="Wired Ampli">
+        
+        <div class="text_protection_top cover_300"></div>
+        
+        <div class="card-img-overlay text_protected cover_300">
+            <h2 class="mb-3">Bienvenue !</h2>
+        </div>
+        
+        <div class="card-body my-4">
+        
+            <!-- <span>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</span><br> -->
+            <span>Félicitations {{ user.username }}, votre compte est maintenant activé !</span><br>
+            {% if targetUrl %}
+            <span><a href="{{ targetUrl }}" class="btn btn-primary mt-3">C'est parti !</a></span>
+            {% else %}
+            <span><a href="{{ targetUrl }}" class="btn btn-primary mt-3">Retour à l'accueil</a></span>
+            {% endif %}
+        
+        </div>
+    
+    </div>
+    </div>
+    </div>
+   
+    
+</div>
+{% endblock %}
+
+{# {{ 'registration.back'|trans }} affiche 'Retour à la page d'origine' #}

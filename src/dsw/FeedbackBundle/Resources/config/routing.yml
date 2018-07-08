@@ -1,0 +1,16 @@
+dsw_feedback_seance:
+    resource: "@dswFeedbackBundle/Resources/config/routing/seance.yml"
+    prefix:   /seance
+    
+dsw_feedback_question:
+    resource: "@dswFeedbackBundle/Resources/config/routing/question.yml"
+    prefix:   /question
+
+dsw_feedback_homepage:
+    path:     /
+    defaults: { _controller: dswFeedbackBundle:Default:index }
+    
+    
+dsw_feedback_start:
+    path:     /{id}
+    defaults: { _controller: dswFeedbackBundle:Seance:start }

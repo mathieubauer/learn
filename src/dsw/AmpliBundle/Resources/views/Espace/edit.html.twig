@@ -1,0 +1,174 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Piloter un espace{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+  
+    <h1>Sélectionner les idées</h1>
+    <a href="{{ path('dsw_ampli_admin_idee', {'id': espace.id}) }}" class="btn btn-outline-primary mb-5">Sélectionner les idées</a>
+   
+    <h1>Options de l'espace</h1>
+    
+    {{ form_start(form) }}
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Titre de l'espace</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.titre) }}</div>
+        </div>
+        
+        {% if form.animateur is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Animateur</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.animateur) }}</div>
+        </div>
+        {% endif %}
+        
+        {% if form.slug is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Code session</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.slug) }}</div>
+        </div>
+        {% endif %}
+       
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Choix de l'étape d'accueil</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.etape) }}</div>
+        </div>
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Permettre l'ajout d'idées</strong><br>
+            <small>À l'étape 1</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.withIdees) }}</div>
+        </div>
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Afficher les cœurs</strong><br>
+            <small>Système de likes à l'étape 1</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.withCoeurs) }}</div>
+        </div>
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Modération</strong><br>
+            <small>Si oui, les idées doivent être validées par l'animateur pour apparaître à l'étape 2</small><br>
+        </div>
+        <div class="col-6">{{ form_widget(form.withModeration) }}</div>
+        </div>
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Constitution d'équipes</strong><br>
+            <small>À l'étape 2, photo et nom de l'équipe</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.withEquipe) }}</div>
+        </div>
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Afficher le bas des cartes</strong><br>
+            <small>Aux étapes 2 et 3, zone avec l'auteur et le nombre de cœurs</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.withFooter) }}</div>
+        </div>
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Autoriser les commentaires</strong><br>
+            <small>À l'étape 3</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.withCommentaires) }}</div>
+        </div>
+        
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Contributions en temps</strong><br>
+            <small>À l'étape 3</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.withTemps) }}</div>
+        </div>
+        
+        {% if form.withArgent is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Contributions financières</strong><br>
+            <small>À l'étape 3 (pas encore disponible)</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.withArgent) }}</div>
+        </div>
+        {% endif %}
+        
+        {% if form.categories is defined %}
+        {{ form_widget(form.categories) }}
+        {% endif %}
+        
+        {% if form.objectifsAlias is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Alias - Objectifs</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.objectifsAlias) }}</div>
+        </div>
+        {% endif %}
+        
+        {% if form.methodeAlias is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Alias - Méthode</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.methodeAlias) }}</div>
+        </div>
+        {% endif %}
+        
+        {% if form.calendrierAlias is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Alias - Calendrier</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.calendrierAlias) }}</div>
+        </div>
+        {% endif %}
+        
+        {% if form.propulserAlias is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Alias - Propulser</strong>
+        </div>
+        <div class="col-6">{{ form_widget(form.propulserAlias) }}</div>
+        </div>
+        {% endif %}
+        
+        {% if form.publicQuestion is defined %}
+        <div class="row mb-3">
+        <div class="col-6 text-right">
+            <strong>Question publique</strong><br>
+            <small>Apparaît sur les fiches publiques</small>
+        </div>
+        <div class="col-6">{{ form_widget(form.publicQuestion) }}</div>
+        </div>
+        {% endif %}
+        
+        <input type="submit" value="Éditer" class="btn btn-primary" />
+    {{ form_end(form) }}
+    
+    <a href="{{ path('dsw_ampli_viewEspace', {'id': espace.id}) }}" class="btn btn-dark my-3">Aller à l'accueil</a>
+    <a href="{{ path('dsw_ampli_homepage', {'id': espace.id}) }}" class="btn btn-dark my-3">Aller à l'étape</a>
+    
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('dsw_ampli_admin') }}" class="btn btn-dark my-3">Accueil Admin</a>
+    {% endif %}
+    
+</div>
+{% endblock %}

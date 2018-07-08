@@ -1,0 +1,95 @@
+{% extends 'dswCoreBundle::base.html.twig' %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>{{ questionnaire.titre }}</h1>
+    <a href="{{ path('quiz_questionnaire_edit', { 'id': questionnaire.id }) }}">Éditer</a>
+    
+    
+    <hr class="mt-5">
+    
+    
+    {# ===== QUESTIONS ===== #}
+    
+    <h2>Questions</h2>
+    
+    {% for question in questionnaire.questions %}
+      
+        <div class="card">
+       
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>{{ question.intitule }}</strong>
+                    <a href="{{ path('quiz_question_edit', { 'id': question.id }) }}" class="btn btn-secondary btn-sm"><i class="fa fa-pencil"></i></a>
+                </div>
+            </div>
+
+            <ul class="list-group list-group-flush">
+            {% for answer in question.answers %}
+                <li class="list-group-item py-2 d-flex justify-content-between">
+                    <small>{{ answer.answer }}</small>
+                    <small>{{ answer.score }}</small>
+                </li>
+            {% endfor %}
+            </ul>
+
+            {# =====
+            {% for answer in question.answers %}
+            {% for attempt in answer.attempts %}
+
+                {{ attempt.user.username }} : {{ attempt.answer.score }}
+
+            {% endfor %}
+            {% endfor %}
+            ===== #}
+        
+        </div>
+        
+    {% endfor %}
+    
+    <a href="{{ path('quiz_question_questionnaire_new', { 'id': questionnaire.id }) }}" class="btn btn-primary my-3">Ajouter une question</a>
+ 
+    
+    <hr class="mt-5">
+    
+    
+    {# ===== REPONSES ===== #}
+    
+    <h2>Réponses</h2>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                {% for question in questionnaire.questions %}
+                <th>{{ question.intitule }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+        
+            {% for attemptsUser in attemptsUsers %}
+            <tr>
+                <td>{{ attemptsUser.user.username }}</td>
+                {% for attempt in attempts if attempt.user.username == attemptsUser.user.username %}
+                <td>{{ attempt.answer.answer }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    
+    
+    
+    <a href="{{ path('dsw_quiz_intro', { 'id': questionnaire.id }) }}" class="btn btn-secondary mt-3">Essayer le questionnaire</a>
+    
+    <a href="{{ path('quiz_questionnaire_index') }}" class="btn btn-secondary mt-3">Retour à la liste des questionnaires</a>
+
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Supprimer le questionnaire" class="btn btn-danger mt-3"/>
+    {{ form_end(delete_form) }}
+
+</div>
+{% endblock %}

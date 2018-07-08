@@ -1,0 +1,24 @@
+eval_record_index:
+    path:     /
+    defaults: { _controller: "dswEvalBundle:Record:index" }
+    methods:  GET
+
+eval_record_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswEvalBundle:Record:show" }
+    methods:  GET
+
+eval_record_new:
+    path:     /new
+    defaults: { _controller: "dswEvalBundle:Record:new" }
+    methods:  [GET, POST]
+
+eval_record_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswEvalBundle:Record:edit" }
+    methods:  [GET, POST]
+
+eval_record_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswEvalBundle:Record:delete" }
+    methods:  DELETE

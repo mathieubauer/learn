@@ -1,0 +1,54 @@
+{# On utilise ici le layout général, qui se situe dans ce même CoreBundle maintenant #}
+{# PAS CELUI UTILISÉ !!! #}
+{% extends "dswCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Page d'accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+  
+    <div class="landing_page">
+    <div class="container py-5">
+
+        {# On affiche tous les messages flash dont le nom est « info » #}
+        {% for message in app.session.flashbag.get('info') %}
+        <div class="alert alert-info">Message flash : {{ message }}</div>
+        {% endfor %}
+        
+        <div class="">
+        <h1 class="display-3 mt-3 type_js">
+            Amplifiez vos <span id="typed"></span>
+        </h1>
+       
+        <!-- <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">S'identifier</a> -->
+        <a class="btn btn-primary btn-xl my-4 disabled" href="{{ path('fos_user_security_login') }}">Créez un ampli</a><br>
+        <a class="btn btn-primary btn-xl" href="{{ path('dsw_ampli_viewEspace', {'id': 1}) }}">Essayez une démo</a>
+        <a class="btn btn-tertiary" href="http://ampli.live/edf/6">Dilex 14/12/2017</a>
+        </div>
+        
+    </div>
+    </div>
+    
+<div id="typed-strings">
+<p>projets</p>
+<p>séminaires</p>
+<p>réunions</p>
+<p>brainstormings</p>
+<p>idées</p>
+</div>
+
+<script src="{{ asset('bundles/dswampli/js/typed.min.js') }}"></script>
+
+<script type="text/javascript">
+var typed = new Typed('#typed', {
+    stringsElement: '#typed-strings',
+    typeSpeed: 40,
+    backSpeed: 20,
+    loop: true,
+    loopCount: 2,
+    showCursor: false,
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Donnez de l'énergie !{% endblock %}
+{% block dsw_ampli_jumbotron %}
+    <h1>{{ espace.titre }}</h1>
+    <h2 class="soustitre mb-0">
+        {% if espace.propulserAlias %}{{ espace.propulserAlias }}{% else %}Donnez de l'énergie !{% endif %}
+    </h2>
+{% endblock %}
+
+{% block dsw_ampli_content %} 
+<div class="container mt-5 idee_liste_propulse">
+    
+    <div class="grid">
+    <div class="grid-sizer col-md-4"></div>
+
+    {% for idee in listIdees %}
+       
+        {% set typeCoeur = 'fa fa-heart-o' %}
+       
+        {% if user %}
+        {% for coeur in idee[0].coeurs %}
+            {% if coeur.user.id == user.id %}
+                {% set typeCoeur = 'fa fa-heart' %}
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+       
+        
+        <div class="grid-item col-md-4">
+        <div class="grid-item-content">
+        <div class="card card_clickable mb-3">
+            
+            {% if idee[0].imgProjet %}
+                <img class="card-img-top img-fluid cover_300" src="{{ asset('/uploads/img/' ~ idee[0].imgProjet) | imagine_filter('ideas_wall') }}" alt="Image projet">
+            {% else %}
+                <div class="card-body gradient_azure body_top"></div>
+            {% endif %}
+            
+            
+            <div class="card-body">
+                <h4 class="card-title">{{ idee[0].titre }}</h4>
+                <p class="card-text">{{ idee[0].description|nl2br }}</p>
+            </div>
+            
+            {% if espace.withFooter %}
+            <hr class="hr_thin">
+            
+            <div class="card-body py-2 card_infos">
+                <div class="d-flex align-items-center">
+                    <div class="mr-3">
+                        <span class="fa fa-user"></span>&nbsp; {{ idee[0].user.username }}
+                    </div>
+                    <div class="ml-auto">
+                    {{ idee[0].coeurs|length }} <span class="{{ typeCoeur }}"></span>
+                    </div>
+                    <!-- <div class="ml-auto">
+                    <a href="{{ path('ampli_idee_public', {'id': idee[0].id}) }}" class="btn btn-link btn-sm ">
+                    PROPULSER
+                    </a>
+                    </div> -->
+                </div>
+            </div>
+            {% endif %}
+              
+            <div class="card-info mx-auto">
+                <h1><a href="{{ path('ampli_idee_public', {'id': idee[0].id}) }}" class="hidden_link">En savoir plus ?</a></h1>
+            </div>
+               
+            <a href="{{ path('ampli_idee_public', {'id': idee[0].id}) }}" class="color-overlay"></a>
+                
+        </div>
+        </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+    
+</div> 
+    
+<!--
+<div class="jumbotron jumbotron-fluid mt-5 mb-0 row">
+<div class="container">
+<p>Vous avez terminé de propulser ?</p>
+<a class="btn btn-primary" href="{{ path('dsw_ampli_viewEspace', {'id': espace.id}) }}">Retour à l'accueil</a>
+</div> 
+</div> 
+-->
+    
+{% endblock %}

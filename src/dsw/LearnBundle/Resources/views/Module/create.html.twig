@@ -1,0 +1,26 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - {{ course.name }} : Nouveau module{% endblock %}
+{% block dsw_learn_content %}
+  
+    <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+   
+    <h1>Création de module</h1>
+    
+    <p>
+    Vous allez créer un module dans le cours "{{ course.name }}"<br>
+    Veuillez saisir son titre.
+    </p>
+
+    {{ form_start(form) }}
+       
+        <div class="mb-3">{{ form_widget(form.name) }}</div>
+
+        <button class="btn btn-learn" type="submit">Créer un module</button>
+        
+    {{ form_end(form) }}
+    
+    </div>
+    </div>
+    
+{% endblock %}

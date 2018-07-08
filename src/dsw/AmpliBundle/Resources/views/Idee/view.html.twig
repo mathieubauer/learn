@@ -1,0 +1,112 @@
+{% extends "dswAmpliBundle::layout2.html.twig" %}
+{% block title %}{{ parent() }} - {{ idee.titre }}{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+   
+    <div class="row idee_page">
+    <div class="col-lg-8 mx-auto">
+    <div class="card idee">
+    
+        {% if idee.imgProjet %}
+            <img class="card-img img-fluid cover_300 pos_a" src="{{ asset('/uploads/img/' ~ idee.imgProjet) | imagine_filter('idea_show') }}" alt="Image projet">
+        {% else %}
+            <img class="card-img img-fluid cover_300 pos_a" src="{{ asset('bundles/dswampli/img/placeholder_projet.jpg') }}" alt="Image projet">
+        {% endif %}
+        
+        <div class="text_protection_top cover_300"></div>
+        
+        <div class="card-img-overlay text_protected cover_300">
+            <!-- <h4 class="theme">Ici thème</h4> --> 
+            <p class="titre_idee mb-3">{{ idee.titre }}</p>
+            <!-- <p class="likes">{{ idee.coeurs|length }} <span class="fa fa-heart"></span></p> -->
+        </div>
+        
+        <div class="card-body p-5">
+            <p class="card-text lead">{{ idee.description|nl2br }}</p>
+            {% if idee.video %}
+            <div class="embed-responsive embed-responsive-16by9 offset-lg-2 col-lg-8 border-vid">
+                <video controls id="vid" class="embed-responsive-item" src="{{ idee.video }}"></video>
+            </div>
+            {% endif %}
+        </div>
+        
+        <hr class="hr_thin">
+        
+        <div class="card-body p-5">
+            <h3 class="mb-3">
+                {% if idee.espace.objectifsAlias %}
+                    {{ idee.espace.objectifsAlias }}
+                {% else %}
+                    Objectifs
+                {% endif %}
+            </h3>
+            <p class="mb-0">{{ idee.objectifs|nl2br }}</p>
+            <h3 class="mt-4 mb-3">
+                {% if idee.espace.methodeAlias %}
+                    {{ idee.espace.methodeAlias }}
+                {% else %}
+                    Méthode
+                {% endif %}
+            </h3>
+            <p class="mb-0">{{ idee.methode|nl2br }}</p>
+            <h3 class="mt-4 mb-3">
+                {% if idee.espace.calendrierAlias %}
+                    {{ idee.espace.calendrierAlias }}
+                {% else %}
+                    Calendrier
+                {% endif %}
+            </h3>
+            <p class="mb-0">{{ idee.calendrier|nl2br }}</p>
+        </div>
+        
+        {% if idee.espace.withEquipe %}
+        <hr class="hr_thin">
+        <div class="card-body p-5">
+            <h3>L'équipe</h3>
+            <div class="col-md-6 col-xs-10 mx-auto">
+            <div class="card polaroid mb-3">
+                {% if idee.imgEquipe %}
+                    <img src="{{ asset('/uploads/img/' ~ idee.imgEquipe) | imagine_filter('equipe') }}" class="card-img-top" alt="imageEquipe">
+                {% else %}
+                    <img src="{{ asset('bundles/dswampli/img/placeholder_team.jpg') }}" class="card-img-top" alt="imageEquipe">
+                {% endif %}
+                <div class="card-body">
+                {% if idee.equipe %}
+                    <p>Projet développé par {{ idee.equipe }}</p>
+                {% else %}
+                    <p>Idée proposée par {{ idee.user.username }}</p>
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endif %}
+    
+    </div>
+    
+        <div class="row mt-1">
+        <div class="offset-lg-2 col-lg-8">
+            
+            {# if is_granted('ROLE_AUTEUR') #}
+            <a href="{{ path('ampli_idee_edit', {'id': idee.id}) }}" class="btn btn-tertiary button_fixed">
+            <span class="fa fa-pencil fa-2x"></span>
+            </a>
+            {# endif #}
+            
+            {% if is_granted('ROLE_ADMIN') or app.user == idee.espace.animateur %}
+            <a href="{{ path('ampli_idee_delete', {'id': idee.id}) }}" class="btn btn-primary mb-3">Supprimer le projet</a>
+            {% endif %}
+            
+            <a href="{{ path('dsw_ampli_develop', {'id': idee.espace.id}) }}" class="btn btn-dark mb-3">Retour aux projets</a>
+
+        </div>
+        </div>
+    
+    
+    </div>
+    </div>
+    
+</div>
+{% endblock %}

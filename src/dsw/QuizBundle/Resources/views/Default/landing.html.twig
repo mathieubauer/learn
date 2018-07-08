@@ -1,0 +1,36 @@
+{% extends "dswQuizBundle::layout.html.twig" %}
+
+{% block dsw_quiz_content %}
+  
+    <div class="landing_page">
+    <div class="container py-5">
+        
+        <div class="text-md-left text-center">
+           
+            <h1 class="display-3 mt-3">
+                Quiz !
+            </h1>
+
+            <a class="btn btn-primary btn-xl my-4" href="{{ path('dsw_quiz_intro', { 'id': demo }) }}">Essayez une démo</a><br>
+            
+            {{ form_start(form) }}
+    
+                {{ form_errors(form) }}
+
+                <div class="row">
+                <div class="input-group col-md-6">
+                    {{ form_widget(form.slug) }}
+                    <span class="input-group-btn">
+                        <input type="submit" value="Go !" class="btn btn-primary btn-lg" />
+                    </span>
+                </div>
+                </div>
+
+            {{ form_end(form) }}
+        
+        </div>
+        
+    </div>
+    </div>
+
+{% endblock %}

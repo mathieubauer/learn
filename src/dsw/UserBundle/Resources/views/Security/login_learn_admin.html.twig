@@ -1,0 +1,39 @@
+{% extends "dswUserBundle::layout.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+    
+    <div class="row mt-5">
+    <div class="col-lg-5 col-md-8 mx-auto mt-3">
+    <div class="card">
+
+        <img class="card-img-top img-fluid mb-1" src="{{ asset('bundles/dswampli/img/connexion_learn.png') }}" alt="Card image cap">
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error.message }}</div>
+        {% endif %}
+
+        <div class="card-block p-4" id="sign_in">
+
+            <form action="{{ path("learn_admin_security_check") }}" method="post" class="form-horizontal mx-3">
+
+                <input type="text" id="username" name="_username" required="required" placeholder="Votre email professionnel" class="form-control mb-3" />
+
+                <input type="password" id="password" name="_password" required="required" placeholder="Mot de passe" class="form-control mb-3" />
+
+                <div class="row"> 
+                <div class="text-center mx-auto">
+                <input type="submit" id="_submit" name="_submit" value="Espace administrateur" class="btn btn-primary mb-3" />
+                </div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+</div
+{% endblock %}

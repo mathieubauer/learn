@@ -1,0 +1,24 @@
+feedback_question_index:
+    path:     /
+    defaults: { _controller: "dswFeedbackBundle:Question:index" }
+    methods:  GET
+
+feedback_question_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswFeedbackBundle:Question:show" }
+    methods:  GET
+
+feedback_question_new:
+    path:     /new
+    defaults: { _controller: "dswFeedbackBundle:Question:new" }
+    methods:  [GET, POST]
+
+feedback_question_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswFeedbackBundle:Question:edit" }
+    methods:  [GET, POST]
+
+feedback_question_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswFeedbackBundle:Question:delete" }
+    methods:  DELETE

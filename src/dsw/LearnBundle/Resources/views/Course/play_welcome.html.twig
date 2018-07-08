@@ -1,0 +1,52 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - {{ course.name }}{% endblock %}
+{% block dsw_learn_content %}
+
+    {# Affiche le choix de module #}
+    
+        <h1>{{ course.name }}</h1>
+        
+        <p>Par défaut, on affiche ici le remier module.</p>
+        <p>Il faudrait mettre une page d'accueil !</p>
+        
+        <h2>{{ course.modules[0].name }}</h2>
+        
+        {% for unit in course.modules[0].units %}
+           
+            {# <hr> #}
+            {# <h3>{{ unit.name }}</h3> #}
+            
+            <div class="mb-3">
+            
+                {% if unit.type == 'image' %}
+
+                    <img src="{{ unit.content }}" class="img-fluid" alt="Image">
+
+                {% elseif unit.type == 'video' %}
+
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ unit.content }}"></iframe>
+                    </div>
+
+                {% else %}
+
+                    {{ unit.content|raw }}
+
+                {% endif %}
+            
+            </div>
+            
+        {% endfor %}
+        
+        
+        <h3>Choix du module</h3>
+        
+        <ul class="list-group w-100">
+        {% for module in course.modules %}
+         
+            <a href="{{ path('module_play', {'id': module.id }) }}" class="list-group-item list-group-item-action list-group-item-learn">{{ module.name }}</a>
+            
+        {% endfor %}
+        </ul>
+
+{% endblock %}

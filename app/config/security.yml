@@ -1,0 +1,112 @@
+# app/config/security.yml
+
+security:
+  encoders:
+    Symfony\Component\Security\Core\User\User: sha512
+    dsw\UserBundle\Entity\User: sha512
+
+  role_hierarchy:
+    # Un admin hérite des droits d'auteur et de modérateur
+    ROLE_AUTEUR:      ROLE_USER
+    ROLE_EDITEUR:     ROLE_AUTEUR
+    ROLE_ANIMATEUR:   [ROLE_USER, ROLE_AUTEUR] # voir si besoin de tous les citer ?
+    ROLE_ADMIN:       ROLE_EDITEUR
+    # On garde ce rôle superadmin, il nous resservira par la suite
+    ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+  providers:
+    main:
+      # id: fos_user.user_provider.username
+      id: fos_user.user_provider.username_email
+    in_memory:     # à supprimer un jour
+      memory:
+        users:
+          admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+    main_ZZZ:
+      entity:
+        class:    dsw\UserBundle\Entity\User
+        property: email
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+      
+    ## quiz:
+    ##     pattern:  ^/quiz
+    ##     anonymous: ~
+    ##     form_login:
+    ##         check_path: fos_user_security_check
+    ##         login_path: fos_user_registration_register
+    ##     logout:
+    ##         path:   /quiz/logout
+    ##         target: /
+    
+    main:
+      pattern:   ^/zzz
+      anonymous: false
+      provider:     main
+      form_login:
+        login_path: /zzz/main_login
+        check_path: /zzz/main_login_check
+      logout:
+        path:       /main_logout
+        target:     /
+    
+    learn_admin_fos_user:
+      pattern:      ^/learn/admin
+      anonymous:    true
+      provider:     main
+      form_login:
+        login_path: learn_admin_security_login
+        check_path: learn_admin_security_check
+        always_use_default_target_path: false
+        default_target_path:            /
+        target_path_parameter:          _target_path
+        use_referer:                    true
+      logout:
+        path:       learn_admin_security_logout
+        target:     /
+      # logout_on_user_change: true
+      remember_me:
+        secret:     '%secret%' # %secret% est un paramètre de parameter
+        
+    learn:
+      pattern:      ^/learn
+      anonymous:    true
+      provider:     main
+      form_login:
+        login_path: learn_security_login
+        check_path: learn_security_check
+        always_use_default_target_path: false
+        default_target_path:            /
+        target_path_parameter:          _target_path
+        use_referer:                    true
+      logout:
+        path:       learn_security_logout
+        target:     /learn
+      # logout_on_user_change: true
+      remember_me:
+        secret:     '%secret%' # %secret% est un paramètre de parameter
+      
+    fos_user:
+      pattern:      ^/
+      anonymous:    true
+      provider:     main
+      form_login:
+        login_path: fos_user_security_login
+        check_path: fos_user_security_check
+        always_use_default_target_path: false
+        default_target_path:            /
+        target_path_parameter:          _target_path
+        use_referer:                    true
+      logout:
+        path:       fos_user_security_logout
+        target:     /
+      # logout_on_user_change: true
+      remember_me:
+        secret:     '%secret%' # %secret% est un paramètre de parameter
+
+  # access_control:
+  #     - { path: ^/admin, roles: ROLE_ADMIN }
+  #     - { path: ^/learn, roles: ROLE_USER }

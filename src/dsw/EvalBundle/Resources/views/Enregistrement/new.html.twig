@@ -1,0 +1,32 @@
+{% extends "dswEvalBundle::layout.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+{% block dsw_eval_content %}
+   
+    <h1>{{ theme }} ({{ id }}/6)</h1>
+    <p><strong>Rappel : Pour chaque thème, vous devez coter au moins une phrase à 0, au moins une à 2 et ainsi de suite.</strong></p>
+    
+    {{ form_start(form) }}
+      
+        {% for record in form.records %}
+           
+            <div class="row question_score mb-2">
+            
+                <div class="col-8 col-sm-10 d-flex align-items-center">
+                <span>{{ questions[loop.index0].intitule }}</span>
+                </div>
+
+                <div class="col-4 col-sm-2 d-flex align-items-center">
+                {{ form_widget(record.points, { 'attr': {'min': 0, 'max': 6, 'step': 2, 'placeholder': '0 à 6', 'class': 'text-center'} }) }}
+                </div>
+            
+            </div>
+            
+        {% endfor %}
+       
+        {{ form_widget(form) }}
+        
+        <input type="submit" value="Suite" class="btn btn-primary mt-3" />
+        
+    {{ form_end(form) }}
+    
+{% endblock %}

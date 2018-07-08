@@ -1,0 +1,43 @@
+services:
+    dsw.form.registration:
+        class: dsw\UserBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: dsw_user_registration }
+            
+    dsw.form.profile:
+        class: dsw\UserBundle\Form\Type\ProfileFormType
+        tags:
+            - { name: form.type, alias: dsw_user_profile }
+            
+    # my_custom.user_provider.email:
+    #     class: dsw\UserBundle\Security\EmailProvider
+    #     public: false
+    #     arguments: [@fos_user.user_manager] 
+    
+    app.redirect_after_registration_subscriber:
+        class: dsw\UserBundle\EventListener\RedirectAfterRegistrationSubscriber
+        autowire: true
+        tags:
+            - { name: kernel.event_subscriber }
+            
+    # app.fill_after_initialize:
+    #     class: dsw\UserBundle\EventListener\FillAfterInitialize
+    #     autowire: true
+    #     tags:
+    #         - { name: kernel.event_subscriber }
+    
+    # login_listener:
+    #     class: dsw\UserBundle\EventListener\LoginListener
+    #     autowire: true
+    #     tags:
+    #         - { name: kernel.event_subscriber }
+            
+    # REDIRIGE VERS UNE PAGE DE SAISIE DU MAIL
+    # POUR CONNEXION SANS MOT DE PASSE
+    # dsw.user_login_route_listener:
+    #     class: dsw\UserBundle\EventListener\UserLoginRouteListener
+    #     arguments:
+    #         - '@security.token_storage'
+    #         - '@router'
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

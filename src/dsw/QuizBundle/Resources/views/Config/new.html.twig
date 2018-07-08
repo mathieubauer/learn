@@ -1,0 +1,20 @@
+{% extends "dswQuizBundle::layout.html.twig" %}
+
+{% block dsw_quiz_content %}
+<div class="container my-5">
+   
+    <h1>Config creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('quiz_config_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    
+</div>
+{% endblock %}

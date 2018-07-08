@@ -1,0 +1,25 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Configuration{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+   
+    <h1>Configuration</h1>
+    
+    {{ form_start(form) }}
+        
+        {% for config in form.configs %}
+            {{ form_widget(config.name) }}
+            {{ form_widget(config.value) }}
+            <br>
+        {% endfor %}
+        
+        <input type="submit" value="Edit" />
+        
+    {{ form_end(form) }}
+    
+    <a href="{{ path('dsw_ampli_admin') }}" class="btn btn-dark my-3">Accueil Admin</a>
+    
+</div>
+{% endblock %}

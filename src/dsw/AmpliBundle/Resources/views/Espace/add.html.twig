@@ -1,0 +1,38 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Ajouter un espace{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+   
+    <h1>Ajouter un espace</h1>
+    
+    {{ form_start(form) }}
+    
+        {{ form_errors(form) }}
+
+        <div class="mb-3">
+        {{ form_widget(form.titre) }}
+        </div>
+        
+        <div class="mb-3">
+        {{ form_widget(form.slug) }}
+        </div>
+        
+        <div class="mb-3">
+        {{ form_widget(form.animateur) }}
+        </div>
+
+        {{ form_label(form.categories, 'Catégories') }}
+        <div class="categories" data-prototype="{{ form_widget(form.categories.vars.prototype)|e('html_attr') }}">
+            {% for categorie in form.categories %}
+                {{ form_widget(categorie.titre) }}
+            {% endfor %}
+        </div>
+
+        <input type="submit" value="Créer un espace !" class="btn btn-primary" />
+    
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% trans_default_domain 'FOSUserBundle' %}
+    
+    <div class="container my-5">
+
+    <div class="row mt-5">
+    <div class="col-lg-5 col-md-8 mx-auto mt-3">
+    <div class="card">
+
+    <img class="card-img-top img-fluid mb-1" src="{{ asset('bundles/dswampli/img/resetting.png') }}" alt="Card image cap">
+    <div class="card-block p-3">
+        
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request form-horizontal mx-3">
+           
+            <div class="input-group mt-4 mb-3">
+                <span class="input-group-addon"><span class="fa fa-envelope fa-lg"></span></span>
+                <input type="text" id="username" name="username" required="required" placeholder="{{ 'resetting.request.username'|trans }}" class="w-100 px-1" />
+            </div>
+            
+            <div class="text-center mx-auto">
+                <input type="submit" value="{{ 'resetting.request.submit'|trans }}" class="btn btn-primary mb-4" />
+            </div>
+            
+        </form>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    </div>
+    <div class="fond_bleu"></div>

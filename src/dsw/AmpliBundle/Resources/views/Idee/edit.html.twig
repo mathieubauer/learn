@@ -1,0 +1,105 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Editer une idée{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+
+    {% if form_errors(form.description) %}
+    <div class="container-fluid">
+    <div class="alert alert-dismissible fade show alert-primary mt-3" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="mb-0">{{ form_errors(form.description) }}</div>
+    </div>
+    </div>
+    {% endif %}
+
+<div class="container my-5">
+  
+<div class="row idee_page">
+<div class="col-lg-8 mx-auto">
+   
+    <h1>Modifier le projet</h1>
+    
+    {{ form_start(form) }}
+    
+        {% if form.categorie is defined %}
+        <div class="mb-1"><strong>Catégorie</strong></div>
+        <div class="row">
+        <div class="mb-3 col-4">{{ form_widget(form.categorie) }}</div>
+        </div>
+        {% endif %}
+        
+        <div class="mb-1"><strong>{{ form_label(form.titre) }}</strong></div>
+        <div class="mb-3 display-4">{{ form_widget(form.titre) }}</div>
+    
+        <div class="mb-1"><strong>Description courte</strong></div>
+        <div class="mb-1">{{ form_widget(form.description) }}</div>
+        <div class="mb-5 text-right"><span id="chars">140</span> / 140</div>
+        
+    
+        {% if form.objectifs is defined %}
+        <div class="mb-1"><strong>
+            {% if idee.espace.objectifsAlias %}
+                {{ idee.espace.objectifsAlias }}
+            {% else %}
+                Objectifs
+            {% endif %}
+        </strong></div>
+        <div class="mb-3">{{ form_widget(form.objectifs) }}</div>
+        {% endif %}
+    
+        {% if form.methode is defined %}
+        <div class="mb-1"><strong>
+            {% if idee.espace.methodeAlias %}
+                {{ idee.espace.methodeAlias }}
+            {% else %}
+                Méthode
+            {% endif %}
+        </strong></div>
+        <div class="mb-3">{{ form_widget(form.methode) }}</div>
+        {% endif %}
+    
+        {% if form.calendrier is defined %}
+        <div class="mb-1"><strong>
+            {% if idee.espace.calendrierAlias %}
+                {{ idee.espace.calendrierAlias }}
+            {% else %}
+                Calendrier
+            {% endif %}
+        </strong></div>
+        <div class="mb-5">{{ form_widget(form.calendrier) }}</div>
+        {% endif %}
+        
+        {% if form.equipe is defined %}
+        {% if idee.espace.withEquipe %}
+        <div class="mb-1"><strong>Equipe</strong></div>
+        <div class="mb-3">{{ form_widget(form.equipe) }}</div>
+        {% else %}
+        {% do form.equipe.setRendered %}
+        {% endif %}
+        {% endif %}
+        
+        {% if form.imgProjetfile is defined %}
+        <div class="mb-1"><strong>{{ form_label(form.imgProjetfile) }}</strong></div>
+        <div class="mb-3">{{ form_widget(form.imgProjetfile) }}</div>
+        {% endif %}
+        
+        {% if form.imgEquipefile is defined %}
+        {% if idee.espace.withEquipe %}
+        <div class="mb-1"><strong>{{ form_label(form.imgEquipefile) }}</strong></div>
+        <div class="mb-3">{{ form_widget(form.imgEquipefile) }}</div>
+        {% else %}
+        {% do form.imgEquipefile.setRendered %}
+        {% endif %}
+        {% endif %}
+    
+    <input type="submit" value="Valider les modifications" class="btn btn-primary" />
+    {{ form_end(form) }}
+    
+</div>
+</div>
+
+</div>
+{% endblock %}

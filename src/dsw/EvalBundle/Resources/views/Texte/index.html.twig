@@ -1,0 +1,41 @@
+{% extends "dswEvalBundle::layout.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+{% block dsw_eval_content %}
+   
+    <h1>Textes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reponse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for texte in textes %}
+            <tr>
+                <td><a href="{{ path('eval_texte_show', { 'id': texte.id }) }}">{{ texte.id }}</a></td>
+                <td>{{ texte.reponse }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('eval_texte_show', { 'id': texte.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('eval_texte_edit', { 'id': texte.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('eval_texte_new') }}">Create a new texte</a>
+        </li>
+    </ul>
+    
+{% endblock %}

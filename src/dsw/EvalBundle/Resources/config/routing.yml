@@ -1,0 +1,44 @@
+dsw_eval_texte:
+    resource: "@dswEvalBundle/Resources/config/routing/texte.yml"
+    prefix:   /texte
+
+dsw_eval_enregistrement:
+    resource: "@dswEvalBundle/Resources/config/routing/enregistrement.yml"
+    prefix:   /enregistrement
+
+dsw_eval_record:
+    resource: "@dswEvalBundle/Resources/config/routing/record.yml"
+    prefix:   /record
+
+dsw_eval_question:
+    resource: "@dswEvalBundle/Resources/config/routing/question.yml"
+    prefix:   /question
+    
+dsw_eval_evaluation:
+    resource: "@dswEvalBundle/Resources/config/routing/evaluation.yml"
+    prefix:   /evaluation
+    
+
+dsw_eval_start:
+    path:     /
+    defaults: { _controller: dswEvalBundle:Evaluation:start }
+    
+dsw_eval_intro:
+    path:     /intro
+    defaults: { _controller: dswEvalBundle:Evaluation:intro }
+    
+dsw_eval_theme:
+    path:     /theme/{id}
+    defaults: { _controller: dswEvalBundle:Enregistrement:new }
+    requirements:
+        id: \d+
+        
+dsw_eval_text:
+    path:     /text
+    defaults: { _controller: dswEvalBundle:Texte:new }
+    
+dsw_eval_fin:
+    path:     /{id}/fin
+    defaults: { _controller: dswEvalBundle:Evaluation:fin }
+    requirements:
+        id: \d+

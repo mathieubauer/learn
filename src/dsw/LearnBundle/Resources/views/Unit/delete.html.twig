@@ -1,0 +1,24 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Supprimer une unité{% endblock %}
+{% block dsw_learn_content %}
+
+    <h1>Supprimer une unité</h1>
+
+    <strong>Cette opération est irréversible.</strong>
+    <p>Etes-vous certain de vouloir supprimer l'unité "{{ unit.name }}" ?</p>
+    
+    {# On met l'id de l'annonce dans la route de l'action du formulaire #}
+    <form action="{{ path('unit_delete', {'id': unit.id}) }}" method="post">
+    
+    <a href="{{ path('module_play', {'id': unit.module.id}) }}" class="btn btn-primary">
+    Annuler
+    </a>
+    
+    {# Ici j'ai écrit le bouton de soumission à la main #}
+    <button class="btn btn-danger" type="submit">Supprimer</button>
+    
+    {# Ceci va générer le champ CSRF #}
+    {{ form_rest(form) }}
+    </form>
+    
+{% endblock %}

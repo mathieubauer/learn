@@ -1,0 +1,51 @@
+course_index:
+    path:     /
+    defaults: { _controller: "dswLearnBundle:Course:index" }
+    methods:  GET
+
+course_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswLearnBundle:Course:show" }
+    methods:  GET
+
+course_new:
+    path:     /new
+    defaults: { _controller: "dswLearnBundle:Course:new" }
+    methods:  [GET, POST]
+
+course_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswLearnBundle:Course:edit" }
+    methods:  [GET, POST]
+
+course_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswLearnBundle:Course:delete" }
+    methods:  DELETE
+    
+    
+course_create:
+    path:     /create
+    defaults: { _controller: "dswLearnBundle:Course:create" }
+    methods:  [GET, POST]
+
+course_play:
+    path:     /{id}
+    defaults: { _controller: "dswLearnBundle:Course:play" }
+    methods:  GET
+    
+course_build:
+    path:     /{id}/build
+    defaults: { _controller: "dswLearnBundle:Course:build" }
+    methods:  [GET, POST]
+    
+course_register:
+    path:     /{id}/register
+    defaults: { _controller: "dswLearnBundle:Course:register" }
+    methods:  [GET, POST]
+    
+    
+course_duplicate_module:
+    path:     /{id}/duplicate
+    defaults: { _controller: "dswLearnBundle:Course:duplicate" }
+    methods:  [GET, POST]

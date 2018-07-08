@@ -1,0 +1,33 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Inscrire des utilisateurs{% endblock %}
+{% block dsw_learn_content %}
+  
+<div class="row justify-content-center">
+<div class="col-md-10">
+   
+    <h1>Inscription utilisateurs - {{ course.name }}</h1>
+    
+
+    {{ form_start(form) }}
+      
+        <div class="row mb-3">
+            <div class="col-12">{{ form_widget(form.learners) }}</div>
+        </div>
+        
+        
+        <div class="ml-0">
+            <button class="btn btn-learn ml-0" type="submit">Enregistrer les modifications</button>
+        </div>
+       
+    {{ form_end(form) }}
+    
+    <hr>
+    
+    <a href="{{ path('course_build', {'id': course.id }) }}" class="btn btn-dark my-3">Modifier le cours</a>
+    <a href="{{ path('course_play', {'id': course.id }) }}" class="btn btn-dark my-3">Voir le cours</a>
+    <a href="{{ path('dsw_ampli_admin_user') }}" class="btn btn-secondary my-3">Gérer les utilisateurs</a>
+    
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>Modification réponse</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Editer" class="btn btn-primary" />
+    {{ form_end(edit_form) }}
+    
+    <strong>Mettre un flashbag pour confirmer l'édition</strong>
+    
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Supprimer la réponse" class="btn btn-danger mt-3" />
+    {{ form_end(delete_form) }}
+    
+    <!-- <a href="{{ path('quiz_answer_index') }}" class="btn btn-secondary mt-3">Retour à la liste des réponses</a> -->
+    <a href="{{ path('quiz_question_show', { 'id': answer.question.id }) }}" class="btn btn-secondary mt-3">Retour à la question</a>
+    
+</div>
+{% endblock %}

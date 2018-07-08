@@ -1,0 +1,35 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Suivi des connexions{% endblock %}
+{% block dsw_learn_content %} 
+    
+    <a href="{{ path('dsw_ampli_admin_user') }}" class="btn btn-secondary mb-5">Gérer les utilisateurs</a>
+
+    <h1>Modules consultés</h1>
+
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Module</th>
+                <th>Course</th>
+                <th>Count</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for module in modules %}
+            <tr>
+                <td><a href="{{ path('module_play', { 'id': module.id }) }}">{{ module.id }}</a></td>
+                <td>{{ module.name }}</td>
+                <td>{{ module.course.name }}</td>
+                <td>{{ module.tracks|length }}</td>
+                <td>
+                    <a href="{{ path('module_play', { 'id': module.id }) }}">show</a>
+                    <a href="{{ path('module_edit', { 'id': module.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

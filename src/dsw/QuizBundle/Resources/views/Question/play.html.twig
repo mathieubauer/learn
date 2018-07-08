@@ -1,0 +1,100 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+<div class="row">
+   
+    <div class="col-md-12">
+    <h1 class="question">{{ question.intitule }}</h1>
+    </div>
+    
+    
+    <!--
+    <form method="post" action="index.php?questionnaire=test_suiv">
+
+        <div class="" data-toggle="buttons">
+
+            <label class="btn btn-primary reponse">
+            <input type="radio" name="reponse" id="A" value="A"><?php echo $resultat['r1']; ?>
+            </label>
+            <hr class="hr_thin">
+
+            <label class="btn btn-primary reponse">
+            <input type="radio" name="reponse" id="B" value="B"><?php echo $resultat['r2']; ?>
+            </label>
+            <hr class="hr_thin">
+
+            <label class="btn btn-primary reponse">
+            <input type="radio" name="reponse" id="C" value="C"><?php echo $resultat['r3']; ?>
+            </label>
+            <hr class="hr_thin">
+
+            <label class="btn btn-primary reponse">
+            <input type="radio" name="reponse" id="D" value="D"><?php echo $resultat['r4']; ?>
+            </label>
+
+        </div>
+        <br>
+
+        <input type="submit" class="btn btn-primary pull-right" value="Valider la réponse" />
+
+    </form>
+    -->
+    
+    {{ form_start(reponse) }}
+        {{ form_widget(reponse) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(reponse) }}
+    
+    
+    <!--<div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            {{ question.r1 }}
+        </div>
+    </div>
+    </div>
+    
+    <div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            {{ question.r2 }}
+        </div>
+    </div>
+    </div>
+    
+    <div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            {{ question.r3 }}
+        </div>
+    </div>
+    </div>
+    
+    <div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            {{ question.r4 }}
+        </div>
+    </div>
+    </div>-->
+
+
+
+    <ul>
+        <li>
+            <a href="{{ path('quiz_question_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('quiz_question_edit', { 'id': question.id }) }}">Edit</a>
+        </li>
+        <li>
+            <small>{{ question.id }}</small>
+        </li>
+    </ul>
+    
+    
+    
+</div>
+</div>
+{% endblock %}

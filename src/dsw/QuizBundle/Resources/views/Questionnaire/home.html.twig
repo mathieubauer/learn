@@ -1,0 +1,29 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block title %}
+  Page d'accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+  
+    <div class="landing_page">
+    <div class="container py-5">
+
+        {# On affiche tous les messages flash dont le nom est « info » #}
+        {% for message in app.session.flashbag.get('info') %}
+        <div class="alert alert-info">Message flash : {{ message }}</div>
+        {% endfor %}
+        
+        <div class="text-md-left text-center">
+           
+            <h1 class="display-3 mt-3">
+                Quiz !
+            </h1>
+
+            <a class="btn btn-primary btn-xl my-4" href="{{ path('dsw_quiz_intro', { 'id': 1 }) }}">Essayez une démo</a><br>
+        </div>
+        
+    </div>
+    </div>
+
+{% endblock %}

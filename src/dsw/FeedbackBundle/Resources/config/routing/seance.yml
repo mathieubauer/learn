@@ -1,0 +1,24 @@
+feedback_seance_index:
+    path:     /
+    defaults: { _controller: "dswFeedbackBundle:Seance:index" }
+    methods:  GET
+
+feedback_seance_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswFeedbackBundle:Seance:show" }
+    methods:  GET
+
+feedback_seance_new:
+    path:     /new
+    defaults: { _controller: "dswFeedbackBundle:Seance:new" }
+    methods:  [GET, POST]
+
+feedback_seance_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswFeedbackBundle:Seance:edit" }
+    methods:  [GET, POST]
+
+feedback_seance_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswFeedbackBundle:Seance:delete" }
+    methods:  DELETE

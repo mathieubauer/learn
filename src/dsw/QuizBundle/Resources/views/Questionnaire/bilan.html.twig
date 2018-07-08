@@ -1,0 +1,43 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>{{ questionnaire.titre }}</h1>
+    <h2>Votre score : {{ score }} point(s)</h2>
+    
+    <div class="row">
+    {% for attempt in attempts if attempt.answer.question.questionnaire.id == questionnaire.id %}
+       
+        <div class="col-md-12">
+        <div class="card">
+            
+            <div class="card-header">
+              
+                <strong>{{ attempt.answer.question.intitule }}</strong>
+            </div>
+            <div class="card-body">
+                Votre réponse : {{ attempt.answer.answer }}<br>
+                {% if bonnesReponses[loop.index0].answer is defined %}
+                    La bonne réponse : {{ bonnesReponses[loop.index0].answer }}<br>
+                {% endif %}
+                Score : {{ attempt.answer.score }}
+                
+            </div>
+            
+        </div>
+        </div>
+        
+    {% else %}
+    
+        <div class="col-md-12">
+        <p>Vous n'avez répondu à aucune question !</p>
+        </div>
+    
+    {% endfor %}
+    </div>
+    
+    <a class="btn btn-primary mt-3" href="{{ path('dsw_quiz_intro', { 'id': questionnaire.id }) }}">Recommencer le questionnaire</a><br>
+    
+</div>
+{% endblock %}

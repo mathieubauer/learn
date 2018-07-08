@@ -1,0 +1,44 @@
+<?php
+
+namespace dsw\QuizBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Question
+ *
+ * @ORM\Table(name="quiz_question")
+ * @ORM\Entity(repositoryClass="dsw\QuizBundle\Repository\QuestionRepository")
+ */
+class Question
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="intitule", type="string", length=255)
+     */
+    private $intitule;
+    
+    // @ORM\JoinColumn(onDelete="CASCADE") ?!
+    /**
+    * @ORM\ManyToOne(targetEntity="dsw\QuizBundle\Entity\Questionnaire", inversedBy="questions")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $questionnaire;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Answer", mappedBy="question", cascade={"persist"})
+     */
+    private $answers;
+    
+    
+}

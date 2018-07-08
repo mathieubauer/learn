@@ -1,0 +1,34 @@
+{% extends 'dswCoreBundle::layout.html.twig' %}
+
+{% block body %}
+<div class="container-fluid my-md-5 my-3">
+  
+<div class="panel_gauche"></div>
+<div class="panel_droite"></div>
+  
+    <div class="row justify-content-around">
+  
+        <div class="col-md-4 blanc">
+            <div class="card">
+            <div class="card-body">
+            
+            <h1 class="question mb-0">{{ seance.name }}</h1>
+            
+            {% for question in seance.questions %}
+            <p class="text-primary">{{ question.intitule }}</p>
+            {% endfor %}
+            
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+           
+
+            
+        </div>
+    
+    </div>
+    
+</div>
+{% endblock %}

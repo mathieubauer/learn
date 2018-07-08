@@ -1,0 +1,39 @@
+{# app/Resources/views/form/fields.html.twig #}
+{% block form_row %}
+{% spaceless %}
+    <div class="form_row">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
+
+
+{%- block form_widget_compound -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- if form.parent is empty -%}
+            {{ form_errors(form) }}
+        {%- endif -%}
+        {{- block('form_rows') -}}zz
+        {{- form_rest(form) -}}
+    </div>
+{%- endblock form_widget_compound -%}
+
+
+
+
+
+
+{#- block choice_widget_expanded -#}
+    <div class="btn-group" data-toggle="buttons">
+    <div {{ block('widget_container_attributes') }}>
+    {%- for child in form %}
+        {{- form_widget(child) -}}
+        {{- form_label(child) -}}
+    {% endfor -%}
+    </div>
+    </div>
+{#- endblock choice_widget_expanded -#}
+
+

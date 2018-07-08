@@ -1,0 +1,77 @@
+{% extends "dswEvalBundle::layout.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+{% block dsw_eval_content %}
+
+   
+    <h1>Evalué : {{ evaluation.evalue.firstname }} {{ evaluation.evalue.lastname }}</h1>
+        
+    <p>Evaluateurs :</p>
+    <ul>
+        {% for evaluateur in evaluation.evaluateurs %}
+        <li>{{ evaluateur.firstname }} {{ evaluateur.lastname }}</li>
+        {% endfor %}
+    </ul>
+    
+    <br>
+    <br>
+    
+    
+    {% for evaluateur in evaluation.evaluateurs %}
+    
+        <h2>Réponses de {{ evaluateur.firstname }} {{ evaluateur.lastname }}</h2>
+
+        {% set colonnes = 8 %}
+        {% set i = 0 %}
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Entreprenant</th>
+                    <th>Réaliste</th>
+                    <th>Participatif</th>
+                    <th>Organisateur</th>
+                    <th>Directif</th>
+                    <th>Arrangeant</th>
+                    <th>Improvisateur</th>
+                    <th>Formaliste</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            
+                <tr>
+                {% for record in evaluation.records if record.user == evaluateur %}
+
+                    <td>{{ record.points }}</td>
+
+                    {% if i == 48 or loop.index % colonnes == 0 %}
+                    </tr>
+                    <tr>
+                    {% endif %}
+
+                {% set i = i + 1 %}        
+
+                {% endfor %}
+                </tr>
+            
+            </tbody>
+            
+        </table>
+
+    
+    {% endfor %}
+    
+
+
+
+
+    <a href="{{ path('eval_evaluation_index') }}" class="btn btn-primary">Back to the list</a>
+
+    <a href="{{ path('eval_evaluation_edit', { 'id': evaluation.id }) }}" class="btn btn-primary">Edit</a>
+
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-danger">
+    {{ form_end(delete_form) }}
+
+    
+{% endblock %}

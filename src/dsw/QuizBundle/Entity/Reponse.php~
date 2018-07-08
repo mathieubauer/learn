@@ -1,0 +1,78 @@
+<?php
+
+namespace dsw\QuizBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Reponse
+ *
+ * @ORM\Table(name="quiz_reponse")
+ * @ORM\Entity(repositoryClass="dsw\QuizBundle\Repository\ReponseRepository")
+ */
+class Reponse
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="choix", type="smallint")
+     */
+    private $choix;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="dsw\QuizBundle\Entity\Question")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $question;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="dsw\UserBundle\Entity\User")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $user;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set choix
+     *
+     * @param integer $choix
+     *
+     * @return Reponse
+     */
+    public function setChoix($choix)
+    {
+        $this->choix = $choix;
+
+        return $this;
+    }
+
+    /**
+     * Get choix
+     *
+     * @return int
+     */
+    public function getChoix()
+    {
+        return $this->choix;
+    }
+}
+

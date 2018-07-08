@@ -1,0 +1,30 @@
+quiz_question_index:
+    path:     /
+    defaults: { _controller: "dswQuizBundle:Question:index" }
+    methods:  GET
+
+quiz_question_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswQuizBundle:Question:show" }
+    methods:  GET
+
+quiz_question_new:
+    path:     /new
+    defaults: { _controller: "dswQuizBundle:Question:new" }
+    methods:  [GET, POST]
+
+quiz_question_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswQuizBundle:Question:edit" }
+    methods:  [GET, POST]
+
+quiz_question_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswQuizBundle:Question:delete" }
+    methods:  DELETE
+    
+    
+quiz_question_questionnaire_new:
+    path:     /{id}/new
+    defaults: { _controller: "dswQuizBundle:Question:newByQuestionnaire" }
+    methods:  [GET, POST]

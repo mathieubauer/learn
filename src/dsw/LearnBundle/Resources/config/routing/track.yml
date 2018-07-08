@@ -1,0 +1,30 @@
+track_index:
+    path:     /
+    defaults: { _controller: "dswLearnBundle:Track:index" }
+    methods:  GET
+
+track_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswLearnBundle:Track:show" }
+    methods:  GET
+
+track_new:
+    path:     /new
+    defaults: { _controller: "dswLearnBundle:Track:new" }
+    methods:  [GET, POST]
+
+track_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswLearnBundle:Track:edit" }
+    methods:  [GET, POST]
+
+track_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswLearnBundle:Track:delete" }
+    methods:  DELETE
+    
+    
+track_index_module:
+    path:     /module
+    defaults: { _controller: "dswLearnBundle:Track:module" }
+    methods:  GET

@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /Users/mbr/Documents/a_MAMP/ampli_symfony/app/config/routing.yml

@@ -1,0 +1,45 @@
+dsw_quiz_answer:
+    resource: "@dswQuizBundle/Resources/config/routing/answer.yml"
+    prefix:   /answer
+
+dsw_quiz_attempt:
+    resource: "@dswQuizBundle/Resources/config/routing/attempt.yml"
+    prefix:   /attempt
+
+dsw_quiz_question:
+    resource: "@dswQuizBundle/Resources/config/routing/question.yml"
+    prefix:   /question
+    
+dsw_quiz_questionnaire:
+    resource: "@dswQuizBundle/Resources/config/routing/questionnaire.yml"
+    prefix:   /questionnaire
+    
+dsw_quiz_config:
+    resource: "@dswQuizBundle/Resources/config/routing/config.yml"
+    prefix:   /admin/config
+    
+
+# ROUTES PERSONNALISEES
+
+dsw_quiz_home:
+    path:     /
+    defaults: { _controller: dswQuizBundle:Questionnaire:landing }
+    # defaults: { _controller: dswQuizBundle:Questionnaire:index } pour administrer
+    
+dsw_quiz_intro:
+    path:     /{id}
+    defaults: { _controller: dswQuizBundle:Questionnaire:intro }
+    requirements:
+        id: \d+
+    
+dsw_quiz_question_play:
+    path:     /question/{id}
+    defaults: { _controller: dswQuizBundle:Attempt:play }
+
+dsw_quiz_bilan:
+    path:     /{id}/bilan
+    defaults: { _controller: dswQuizBundle:Questionnaire:bilan }
+    
+dsw_quiz_admin:
+    path:     /admin
+    defaults: { _controller: dswQuizBundle:Questionnaire:index }

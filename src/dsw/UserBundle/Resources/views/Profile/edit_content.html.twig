@@ -1,0 +1,54 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+    <div class="row mt-5">
+    <div class="col-lg-5 col-md-8 mx-auto mt-3">
+    <div class="card">
+
+    <img class="card-img-top img-fluid mb-1" src="{{ asset('bundles/dswampli/img/wiredAmpli.png') }}" alt="Card image cap">
+    <div class="card-block p-3">
+
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'class': 'fos_user_profile_edit'}}) }}
+    
+        {% if form_errors(form) %}    
+            <div class="alert alert-warning" role="alert">
+                <div class="mb-0">{{ form_errors(form) }}</div>
+            </div>
+        {% endif %}
+
+        {% if form.username is defined %}
+        <div class="mt-3 mb-1"><strong>Nom d'utilisateur</strong></div>
+        <div class="input-group mb-3">
+            <span class="input-group-addon"><span class="fa fa-user fa-lg"></span></span>
+            {{ form_widget(form.username) }}
+        </div>
+        {% endif %}
+        
+        <div class="mt-3 mb-1"><strong>Prénom et Nom</strong></div>
+        <div class="row mb-3">
+            <div class="col-6">{{ form_widget(form.firstname) }}</div>
+            <div class="col-6">{{ form_widget(form.lastname) }}</div>
+        </div>
+        
+        <div class="mt-3 mb-1"><strong>Email</strong></div>
+        <div class="input-group mb-3">
+            <span class="input-group-addon"><span class="fa fa-envelope fa-lg"></span></span>
+            {{ form_widget(form.email) }}
+        </div>
+        
+        <div class="mt-3 mb-1"><strong>Mot de passe actuel</strong></div>
+        <div class="input-group mb-3">
+            <span class="input-group-addon"><span class="fa fa-lock fa-lg"></span></span>
+            {{ form_widget(form.current_password) }}
+        </div>
+
+        <div>
+            <input type="submit" value="Modifier le compte" class="btn btn-primary mb-3" />
+        </div>
+
+    {{ form_end(form) }}
+
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="fond_bleu"></div>

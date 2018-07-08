@@ -1,0 +1,45 @@
+{% extends 'dswCoreBundle::base.html.twig' %}
+
+{% block body %}
+<div class="container my-5">
+  
+    <a href="{{ path('quiz_config_index') }}" class="btn btn-tertiary mb-5">Administration Quiz</a>
+   
+    <h1>Questionnaires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Code</th>
+                <th>Création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for questionnaire in questionnaires %}
+            <tr>
+                <td><a href="{{ path('quiz_questionnaire_show', { 'id': questionnaire.id }) }}">{{ questionnaire.id }}</a></td>
+                <td>{{ questionnaire.titre }}</td>
+                <td>{% if questionnaire.code %}{{ questionnaire.code }}{% endif %}</td>
+                <td>{% if questionnaire.dateCrea %}{{ questionnaire.dateCrea|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('quiz_questionnaire_show', { 'id': questionnaire.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('quiz_questionnaire_edit', { 'id': questionnaire.id }) }}">Editer</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ path('quiz_questionnaire_new') }}" class="btn btn-primary">Créer un nouveau questionnaire</a>
+    
+</div>
+{% endblock %}

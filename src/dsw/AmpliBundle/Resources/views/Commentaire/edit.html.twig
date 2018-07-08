@@ -1,0 +1,25 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Éditer un commentaire{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+<div class="row justify-content-center">
+<div class="col-md-8">
+   
+    <h1>Éditer le commentaire</h1>
+
+    {{ form_start(edit_form) }}
+       
+        {{ form_widget(edit_form.content) }}
+        
+        <a href="{{ path('ampli_idee_public', { 'id': commentaire.idee.id }) }}" class="btn btn-secondary mt-3">Annuler</a>
+        
+        <input type="submit" value="Enregistrer les modifications" class="btn btn-primary mt-3" />
+        
+    {{ form_end(edit_form) }}
+    
+</div>
+</div>
+</div>
+{% endblock %}

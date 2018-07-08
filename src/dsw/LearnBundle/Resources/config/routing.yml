@@ -1,0 +1,27 @@
+dsw_learn_unit:
+    resource: "@dswLearnBundle/Resources/config/routing/unit.yml"
+    prefix:   /unit
+
+dsw_learn_module:
+    resource: "@dswLearnBundle/Resources/config/routing/module.yml"
+    prefix:   /module
+
+dsw_learn_course:
+    resource: "@dswLearnBundle/Resources/config/routing/course.yml"
+    prefix:   /course
+    
+dsw_learn_message:
+    resource: "@dswLearnBundle/Resources/config/routing/message.yml"
+    prefix:   /message
+    
+dsw_learn_admin:
+    resource: "@dswLearnBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin
+    
+dsw_learn_track:
+    resource: "@dswLearnBundle/Resources/config/routing/track.yml"
+    prefix:   /track
+
+dsw_learn_homepage:
+    path:     /
+    defaults: { _controller: dswLearnBundle:Default:index }

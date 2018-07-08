@@ -1,0 +1,39 @@
+{% extends "dswEvalBundle::layout.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+{% block dsw_eval_content %}
+   
+    <h1>Enregistrements list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for enregistrement in enregistrements %}
+            <tr>
+                <td><a href="{{ path('eval_enregistrement_show', { 'id': enregistrement.id }) }}">{{ enregistrement.id }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('eval_enregistrement_show', { 'id': enregistrement.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('eval_enregistrement_edit', { 'id': enregistrement.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('eval_enregistrement_new') }}">Create a new enregistrement</a>
+        </li>
+    </ul>
+    
+{% endblock %}

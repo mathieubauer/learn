@@ -1,0 +1,125 @@
+<?php
+
+namespace dsw\LearnBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Track
+ *
+ * @ORM\Table(name="learn_track")
+ * @ORM\Entity(repositoryClass="dsw\LearnBundle\Repository\TrackRepository")
+ */
+class Track
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="dsw\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="dsw\LearnBundle\Entity\Module", inversedBy="messages", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $module;
+
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date.
+     *
+     * @param \DateTime $date
+     *
+     * @return Track
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date.
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set user.
+     *
+     * @param \dsw\UserBundle\Entity\User $user
+     *
+     * @return Track
+     */
+    public function setUser(\dsw\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \dsw\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set module.
+     *
+     * @param \dsw\LearnBundle\Entity\Module $module
+     *
+     * @return Track
+     */
+    public function setModule(\dsw\LearnBundle\Entity\Module $module)
+    {
+        $this->module = $module;
+
+        return $this;
+    }
+
+    /**
+     * Get module.
+     *
+     * @return \dsw\LearnBundle\Entity\Module
+     */
+    public function getModule()
+    {
+        return $this->module;
+    }
+}

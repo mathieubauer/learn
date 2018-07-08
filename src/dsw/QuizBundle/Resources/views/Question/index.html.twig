@@ -1,0 +1,48 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>Liste des questions - Pour contrôle</h1>
+
+    <table class="table mb-5">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Intitule</th>
+                <th>Réponses</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td><a href="{{ path('quiz_question_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
+                <td>{{ question.intitule }}</td>
+                <td>
+                    {% for answer in question.answers %}
+                        {{ answer.answer }} - {{ answer.score }}<br>
+                    {% endfor %}
+                
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('quiz_question_show', { 'id': question.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('quiz_question_edit', { 'id': question.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <a href="{{ path('quiz_question_new') }}" class="btn btn-secondary">Créer une nouvelle question</a>
+    <p>Normalement, pas de création de question en dehors d'un questionnaire</p>
+    
+</div>
+{% endblock %}

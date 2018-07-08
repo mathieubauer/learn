@@ -1,0 +1,120 @@
+{% extends "dswEvalBundle::layout.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+{% block dsw_eval_content %}
+   
+    <h1>Evaluation 360 - Merci !</h1>
+    
+    {% if bilan %}
+    
+        <h2>Réponses de {{ evaluateur.firstname }} {{ evaluateur.lastname }}</h2>
+        
+<div class="skillbar clearfix" data-percent="{{ entreprenant * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #ef9a9a;"><span>Entreprenant</span></div>
+	<div class="skillbar-bar" style="background: #ef9a9a;"></div>
+	<div class="skill-bar-percent">{{ entreprenant }}</div>
+</div>
+
+<div class="skillbar clearfix" data-percent="{{ realiste * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #ce93d8;"><span>Réaliste</span></div>
+	<div class="skillbar-bar" style="background: #ce93d8;"></div>
+	<div class="skill-bar-percent">{{ realiste }}</div>
+</div>
+
+<div class="skillbar clearfix" data-percent="{{ participatif * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #b0bec5;"><span>Participatif</span></div>
+	<div class="skillbar-bar" style="background: #b0bec5;"></div>
+	<div class="skill-bar-percent">{{ participatif }}</div>
+</div>
+
+<div class="skillbar clearfix" data-percent="{{ organisateur * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #9fa8da;"><span>Organisateur</span></div>
+	<div class="skillbar-bar" style="background: #9fa8da;"></div>
+	<div class="skill-bar-percent">{{ organisateur }}</div>
+</div>
+
+<div class="skillbar clearfix" data-percent="{{ directif * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #ffab91;"><span>Directif</span></div>
+	<div class="skillbar-bar" style="background: #ffab91;"></div>
+	<div class="skill-bar-percent">{{ directif }}</div>
+</div>
+
+<div class="skillbar clearfix" data-percent="{{ arrangeant * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #80cbc4;"><span>Arrangeant</span></div>
+	<div class="skillbar-bar" style="background: #80cbc4;"></div>
+	<div class="skill-bar-percent">{{ arrangeant }}</div>
+</div>
+
+<div class="skillbar clearfix" data-percent="{{ improvisateur * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #e6ee9c;"><span>Improvisateur</span></div>
+	<div class="skillbar-bar" style="background: #e6ee9c;"></div>
+	<div class="skill-bar-percent">{{ improvisateur }}</div>
+</div>
+
+<div class="skillbar clearfix" data-percent="{{ formaliste * 100 / 36 }}%">
+	<div class="skillbar-title" style="background: #bcaaa4;"><span>Formaliste</span></div>
+	<div class="skillbar-bar" style="background: #bcaaa4;"></div>
+	<div class="skill-bar-percent">{{ formaliste }}</div>
+</div>
+
+
+        
+        {#
+
+        {% set colonnes = 8 %}
+        {% set i = 0 %}
+
+        
+        <table class="table table-sm">
+            <thead>
+                <tr class="">
+                    <th class="">Entreprenant</th>
+                    <th class="">Réaliste</th>
+                    <th class="">Participatif</th>
+                    <th class="">Organisateur</th>
+                    <th class="">Directif</th>
+                    <th class="">Arrangeant</th>
+                    <th class="">Improvisateur</th>
+                    <th class="">Formaliste</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                {% for record in evaluation.records if record.user == evaluateur %}
+
+                    <td>{{ record.points }}</td>
+
+                    {% if i == 48 or loop.index % colonnes == 0 %}
+                    </tr>
+                    <tr>
+                    {% endif %}
+
+                {% set i = i + 1 %}        
+
+                {% endfor %}
+                </tr>
+
+            </tbody>
+
+        </table>
+            
+        #}
+
+        {% for texte in evaluation.textes %}
+           <strong>{{ texte.reponse }}</strong>
+        {% endfor %}
+    
+    {% endif %}
+    
+    <p>Vos réponses ont bien été prises en compte, merci de votre participation.</p>
+    <p>Vous pouvez maintenant fermer cette fenêtre.</p>
+    
+    
+
+    
+
+
+    
+
+{% endblock %}

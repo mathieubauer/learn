@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Seance</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ seance.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ seance.name }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ seance.code }}</td>
+            </tr>
+            <tr>
+                <th>Filepath</th>
+                <td>{{ seance.filepath }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('feedback_seance_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('feedback_seance_edit', { 'id': seance.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

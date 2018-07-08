@@ -1,0 +1,15 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: ampli_sympfony
+    database_user: root
+    database_password: root
+    secret: 84117c479dc795c789678439a8027a236dc18f9e
+    mailer_transport: smtp
+    mailer_host: ns0.ovh.net
+    mailer_user: ampli@dsides.net
+    mailer_password: zenmeyang
+    mailer_auth_mode: login
+    mailer_encryption: null
+    mailer_port: 587

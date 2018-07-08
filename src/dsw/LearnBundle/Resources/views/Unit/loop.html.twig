@@ -1,0 +1,71 @@
+                {% if unit.type == 'image_url' %}
+                    
+                    <div class="mb-4">
+                    <a href="{{ unit.content }}" target="_blank">
+                        <img src="{{ unit.content }}" class="img-fluid" alt="{{ unit.content }}">
+                    </a>
+                    </div>
+                    
+                {% elseif unit.type == 'image' %}
+                    
+                    <div class="mb-4">
+                    <a href="{{ unit.content }}" target="_blank">
+                        <img src="{{ asset('bundles/dswlearn/img/' ~ unit.image) | imagine_filter('idea_show') }}" target="_blank"alt="{{ unit.content }}" class="img-fluid">
+                    </a>
+                    </div>
+                    
+                {% elseif unit.type == 'video' %}
+
+                    <div class="mb-4">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ unit.content }}"></iframe>
+                    </div>
+                    </div>
+                    
+                {% elseif unit.type == 'video_upload' %}
+
+                    <div class="mb-4">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <!-- <video src="{{ asset('/uploads/images/' ~ unit.image) }}" controls> -->
+                        <video src="{{ asset('bundles/dswlearn/img/' ~ unit.image) }}" controls>
+                            Votre navigateur ne permet pas de lire les vidéos.
+                        </video>
+                    </div>
+                    </div>
+                    
+                {% elseif unit.type == 'title' %}
+                    
+                    <div class="">
+                        <h1 class="mb-3">{{ unit.content }}</h1>
+                    </div>
+                    
+                {% elseif unit.type == 'text' %}
+                    
+                    <div class="mb-4">
+                        <p>{{ unit.content|raw }}</p>
+                    </div>
+                    
+                {% elseif unit.type == 'html' %}
+                    
+                    <div class="mb-4">
+                        <p>{{ unit.content|raw }}</p>
+                    </div>
+                    
+                {% elseif unit.type == 'doc' %}
+                  
+                    <div class="card mb-4">
+                    <div class="card-body">
+                    <a href="{{ asset('bundles/dswlearn/img/' ~ unit.image) }}" target="_blank" class="full_card"></a>
+                    <div class="media">
+                    <img class="mr-3" src="https://image.flaticon.com/icons/svg/138/138557.svg" alt="Document icon" height="42" width="42">
+                    <div class="media-body">
+                    <h5 class="mt-0"><strong class="font-weight-bold">{{ unit.name }}</strong></h5>
+                    {{ unit.content|raw }}
+                    </div>
+                    </div>
+                    </div>
+                    </div>   
+                    
+                {% else %}
+                
+                {% endif %}

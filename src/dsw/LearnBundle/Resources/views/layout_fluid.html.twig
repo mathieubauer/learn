@@ -1,0 +1,215 @@
+{% extends "dswCoreBundle::base.html.twig" %}
+{% block title %}Learn by D-Sides{% endblock %}
+
+{% block opengraph %}
+  
+    <meta name="description" content="Parce que l'outil le plus simple est toujours le meilleur, nous avons créé une plateforme d'apprentissage ultra simplifiée !" />
+   
+    {% if module is defined %}
+    
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Learn by D-Sides" />
+    <meta property="og:description" content="{{ module.course.name }}" />
+    <meta property="og:url" content="http://ampli.live/learn/module/{{ module.id }}" />
+    <meta property="og:image" content="http://ampli.live/web/bundles/dswampli/img/chaises.jpg" />
+    <meta property="og:site_name" content="learn" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="{{ module.course.name }}" />
+    <meta name="twitter:title" content="Learn by D-Sides" />
+    <meta name="twitter:site" content="@dsideslab" />
+    <meta name="twitter:creator" content="@dsideslab" />
+    
+    {% else %}
+    
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Learn by D-Sides" />
+    <meta property="og:description" content="Parce que l'outil le plus simple est toujours le meilleur, nous avons créé une plateforme d'apprentissage ultra simplifiée !" />
+    <meta property="og:url" content="http://ampli.live/learn" />
+    <meta property="og:image" content="http://ampli.live/web/bundles/dswampli/img/chaises.jpg" />
+    <meta property="og:site_name" content="learn" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="Parce que l'outil le plus simple est toujours le meilleur, nous avons créé une plateforme d'apprentissage ultra simplifiée !" />
+    <meta name="twitter:title" content="Learn by D-Sides" />
+    <meta name="twitter:site" content="@dsideslab" />
+    <meta name="twitter:creator" content="@dsideslab" />
+    
+    {% endif %}
+    
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('bundles/dswampli/css/learn.css') }}" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script>
+    feather.replace()
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+{% endblock %}
+
+
+
+{% block nav %}
+<header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-learn fixed-top navbar-toggleable-md">
+
+    <!-- BOUTON MENU -->
+    <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+
+
+    <!-- TITRE -->
+    {% if module is defined %}
+    <a class="navbar-brand" href="{{ path('course_play', {'id': module.course.id}) }}">{# module.course.name #}Learn by D-Sides</a>
+    {% else %}
+    <a class="navbar-brand" href="{{ path('dsw_learn_homepage') }}">Learn by D-Sides</a>
+    {% endif %}
+
+    <!--
+    <ul class="navbar-nav">   
+    {% if module is defined %}
+    <li class="nav-item"><a class="nav-link" href="{{ path('course_play', {'id': module.course.id}) }}">{{ module.course.name }}</a></li>
+    {% else %}
+    <li class="nav-item"><a class="nav-link" href="{{ path('dsw_learn_homepage') }}">Accueil</a></li>
+    {% endif %}
+    </ul>
+    -->
+
+    {% if module is defined %}
+    
+    <!-- BOUTON USER -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-user-circle"></i>
+    </button>
+
+    <!-- AFFICHAGE MENU -->
+    <div class="d-md-none">
+    <div class="collapse navbar-collapse d-md-none" id="navMenu">
+        <ul class="navbar-nav ml-auto">   
+        {% for module_menu in sorted_modules %}
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('module_play', {'id': module_menu.id }) }}">
+                <div class="d-flex flex-row">
+                    {% if module_menu.titre %}
+                        <span class="font-weight-bold">{{ module_menu.name }}</span>
+                    {% else %}
+                        <span>
+                            <i class="fas {% if module_menu.picto %}{{ module_menu.picto }}{% else %}fas fa-arrow-right{% endif %} fa-fw mr-2"></i>
+                        </span>
+                        <span>
+                            {{ module_menu.name }}
+                        </span>
+                    {% endif %}
+                </div>
+            </a>
+        </li>
+
+        {% endfor %}
+        </ul>
+    </div>
+    </div>
+    
+    {% endif %}
+    
+    
+    <!-- AFFICHAGE USER -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">   
+
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle"></i> {{ app.user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('dsw_user_view', {'id': app.user.id}) }}">Mon compte</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('learn_admin_index') }}">Administration</a>
+                        {% endif %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('learn_security_logout') }}">Déconnexion</a>
+                    </div>
+                </li>
+
+            {% else %}
+
+                <li class="nav-item"><a class="nav-link" href="{{ path('learn_security_login') }}">Connexion</a></li>
+
+            {% endif %}
+
+        </ul>
+    </div>
+
+</nav>
+
+</header>
+{% endblock %}
+
+{% block body %}
+<div class="main_container">
+  
+    {# Pour l'animateur #}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {% if espace is defined %}
+        {% if app.user == espace.animateur %}
+        <div class="jumbotron jumbotron-fluid text-center mb-0 p-1 bg-warning">
+        <div class="container">
+        <a href="{{ path('dsw_ampli_espace_animateur', {'id': espace.id}) }}" class="hidden_link cliquable">Espace animateur</a>
+        </div>
+        </div>
+        {% endif %}
+    {% elseif idee is defined %}
+        {% if app.user == idee.espace.animateur %}
+        <div class="jumbotron jumbotron-fluid text-center mb-0 p-1 bg-warning">
+        <div class="container">
+        <a href="{{ path('dsw_ampli_espace_animateur', {'id': idee.espace.id}) }}" class="hidden_link cliquable">Espace animateur</a>
+        </div>
+        </div>
+        {% endif %}
+    {% endif %} 
+    {% endif %} 
+    
+    
+    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+    {% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+    <div class="container-fluid">
+    <div class="alert alert-dismissible fade show alert-{{ key }} mt-3">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    
+
+    {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+    <div class="container-fluid my-md-5 my-3">
+    {% block dsw_learn_content %}
+    {% endblock %}
+    </div>
+    
+    
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

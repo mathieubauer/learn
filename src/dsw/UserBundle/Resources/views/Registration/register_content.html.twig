@@ -1,0 +1,65 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container my-5">
+  
+    <div class="row mt-5">
+    <div class="col-lg-5 col-md-8 mx-auto mt-3">
+    <div class="card">
+        
+        <img class="card-img img-fluid cover_300 pos_a" src="{{ asset('bundles/dswampli/img/wiredAmpli.png') }}" alt="Wired Ampli">
+        <div class="text_protection_top cover_300"></div>
+        
+        <div class="card-img-overlay text_protected cover_300">
+            <h2 class="">Inscription</h2>
+        </div>
+        
+        <div class="card-body">
+        
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                {% if form_errors(form) %}    
+                    <div class="alert alert-warning" role="alert">
+                        <div class="mb-0">{{ form_errors(form) }}</div>
+                    </div>
+                {% endif %}
+
+                {% if form.username is defined %}
+                <div class="mb-1"><strong>Nom d'utilisateur</strong></div>
+                <div class="mb-3">{{ form_widget(form.username) }}</div>
+                {% endif %}
+
+                <!--
+                <div class="mb-1"><strong>Prénom et Nom</strong></div>
+                <div class="row mb-3">
+                    <div class="col-6">{{ form_widget(form.firstname) }}</div>
+                    <div class="col-6">{{ form_widget(form.lastname) }}</div>
+                </div>
+                -->
+
+                <div class="input-group mt-4 mb-3">
+                    <span class="input-group-addon"><span class="fa fa-envelope fa-lg"></span></span>
+                    {{ form_widget(form.email) }}
+                </div>
+
+                {% if form.plainPassword is defined %}
+                <div class="input-group mb-3">
+                    <span class="input-group-addon"><span class="fa fa-lock fa-lg"></span></span>
+                    {{ form_widget(form.plainPassword) }}
+                </div>
+                {% endif %}
+                
+                <div class="row"> 
+                <div class="text-center mx-auto">
+                <input type="submit" value="C'est parti !" class="btn btn-primary mb-3" />
+                </div>
+                </div>
+
+            {{ form_end(form) }}
+        
+        </div>
+    
+    </div>
+    </div>
+    </div>
+    
+</div>

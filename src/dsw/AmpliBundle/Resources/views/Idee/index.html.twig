@@ -1,0 +1,60 @@
+{# Vue administrateur ou animateur #}
+
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Liste des idées{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+   
+    <h1>Liste des idées</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>User</th>
+                <th>Cœurs</th>
+                <th>Sélection</th>
+                <th class="col-1">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for idee in idees %}
+            <tr>
+                <td><a href="{{ path('ampli_idee_show', { 'id': idee[0].id }) }}">{{ idee[0].id }}</a></td>
+                <td>{{ idee[0].titre }}</td>
+                <td>{{ idee[0].description }}</td>
+                <td>{{ idee[0].user }}</td>
+                <td>{{ idee[0].coeurs|length }}</td>
+                <td>
+                    {% if idee[0].selection %}
+                    
+                    <span id="idee_{{ idee[0].id }}" class="selected btn btn-secondary btn-sm"><i class="fa fa-check" aria-hidden="true"></i></span>
+                    
+                    {% else %}
+                    
+                    <span id="idee_{{ idee[0].id }}" class="unselected btn btn-secondary btn-sm"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    
+                    {% endif %}
+                    
+                </td>
+                <td>
+                    <a href="{{ path('ampli_idee_show', { 'id': idee[0].id }) }}" class="btn btn-primary btn-sm m-1"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="{{ path('ampli_idee_edit', { 'id': idee[0].id }) }}" class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{{ path('ampli_idee_delete', { 'id': idee[0].id }) }}" class="btn btn-primary btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        
+    <a href="{{ path('dsw_ampli_viewEspace', {'id': espace.id }) }}" class="btn btn-dark mb-3">Retour à l'espace</a>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('dsw_ampli_admin') }}" class="btn btn-dark mb-3">Accueil Admin</a>
+    {% endif %}
+    
+</div>
+{% endblock %}

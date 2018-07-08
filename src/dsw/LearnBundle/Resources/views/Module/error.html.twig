@@ -1,0 +1,77 @@
+{% extends "dswLearnBundle::layout_fluid.html.twig" %}
+{% block title %}{{ parent() }} - {{ course.name }}{% endblock %}
+{% block dsw_learn_content %}
+  
+<div class="row">
+        
+<nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
+<div class="sidebar-sticky">
+   
+    {% if course.logo %}
+    <div class="p-3">
+        <img src="{{ course.logo }}" class="img-fluid" alt="logo">
+    </div>
+    {% endif %}
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-5 mb-1 text-muted">
+    <span>{{ course.name }}</span>
+    </h6>
+
+    <ul class="nav flex-column">
+    {% for module_menu in course.modules %}
+
+    <li class="nav-item">
+    <a class="nav-link {% if not module_menu.open %}desactive{% endif %} {% if module_menu == module %}active{% endif %}" href="{{ path('module_play', {'id': module_menu.id }) }}">
+    <i class="fas {% if module_menu.picto %}{{ module_menu.picto }}{% else %}fas fa-arrow-right{% endif %} mr-2"></i> {{ module_menu.name }}
+    </a>
+    </li>
+
+    {% endfor %}
+    </ul>
+
+</div>
+</nav>
+       
+       
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+<div class="row justify-content-center">
+<div class="col-md-8">
+  
+        {% if error is defined %}
+           
+            <div class="alert alert-danger">{{ error|raw }}</div>
+            
+        {% else %}
+          
+            {# Normalement, pas de else #}
+           
+            <p>Cette partie n'est pas encore disponible !</p>
+            
+            {% for module_menu in module.course.modules %}
+            {% if module_menu.open %}
+
+            <a class="nav-link" href="{{ path('module_play', {'id': module_menu.id }) }}">
+            Retour à "{{ module_menu.name }}"
+            </a>
+
+            {% endif %}
+            {% endfor %}
+            
+        {% endif %}
+        
+        {% if is_granted('ROLE_ADMIN') %}
+            
+            <a href="{{ path('course_build', {'id': course.id}) }}" class="btn btn-primary my-3">
+                <i class="far fa-folder-open fa-lg mr-2"></i>Modifier le cours
+            </a>
+            
+        {% endif %}
+ 
+</div>
+</div>
+</main>       
+</div> 
+
+    
+{% endblock %}
+

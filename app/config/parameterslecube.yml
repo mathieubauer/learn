@@ -1,0 +1,17 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: mysql55-58.perso
+    database_port: null
+    database_name: lecubeiompmbr
+    database_user: lecubeiompmbr
+    database_password: dRZ2rsn7rcUM
+    
+    mailer_transport: smtp
+    mailer_auth_mode: login
+    mailer_host: ns0.ovh.net
+    mailer_encryption: null
+    mailer_port: 587
+    mailer_user: ampli@dsides.net
+    mailer_password: zenmeyang
+    
+    secret: 84117c479dc795c789678439a8027a236dc18f9e

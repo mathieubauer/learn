@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: localhost
+    database_port: null
+    database_name: ampli
+    database_user: root
+    database_password: XVHVSgiR4ag
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: mat.bauer@gmail.com
+    mailer_password: null
+    secret: 84117c479dc795c789678439a8027a236dc18f9e

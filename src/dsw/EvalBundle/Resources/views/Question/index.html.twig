@@ -1,0 +1,43 @@
+{% extends 'dswCoreBundle::layout.html.twig' %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>Questions list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Intitule</th>
+                <th>Theme</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td><a href="{{ path('eval_question_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
+                <td>{{ question.intitule }}</td>
+                <td>{{ question.theme }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('eval_question_show', { 'id': question.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('eval_question_edit', { 'id': question.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('eval_question_new') }}" class="btn btn-primary">Créer une nouvelle question</a>
+
+    
+</div>
+{% endblock %}

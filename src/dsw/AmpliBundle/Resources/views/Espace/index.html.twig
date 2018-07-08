@@ -1,0 +1,23 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Liste des espaces{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+   
+    <h2>Index espaces</h2>
+    
+    <ul>
+    {% for espace in listEspaces %}
+      <li>
+        <a href="{{ path('dsw_ampli_viewEspace', {'id': espace.id}) }}">
+          {{ espace.titre }}
+        </a>
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'espaces</li>
+    {% endfor %}
+    </ul>
+    
+    <a href="{{ path('dsw_ampli_addEspace') }}">Ajouter un espace</a>
+    
+{% endblock %}

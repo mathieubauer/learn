@@ -1,0 +1,163 @@
+<?php
+
+namespace dsw\AmpliBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Commentaire
+ *
+ * @ORM\Table(name="ampli_commentaire")
+ * @ORM\Entity(repositoryClass="dsw\AmpliBundle\Repository\CommentaireRepository")
+ */
+class Commentaire
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="dsw\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="dsw\AmpliBundle\Entity\Idee", inversedBy="commentaires", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $idee;
+    
+    
+    public function __construct()
+      {
+        // Par défaut, la date de l'annonce est la date d'aujourd'hui
+        $this->date = new \Datetime();
+      }
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     *
+     * @return Commentaire
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Commentaire
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \dsw\UserBundle\Entity\User $user
+     *
+     * @return Commentaire
+     */
+    public function setUser(\dsw\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \dsw\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set idee
+     *
+     * @param \dsw\AmpliBundle\Entity\Idee $idee
+     *
+     * @return Commentaire
+     */
+    public function setIdee(\dsw\AmpliBundle\Entity\Idee $idee)
+    {
+        $this->idee = $idee;
+
+        return $this;
+    }
+
+    /**
+     * Get idee
+     *
+     * @return \dsw\AmpliBundle\Entity\Idee
+     */
+    public function getIdee()
+    {
+        return $this->idee;
+    }
+}

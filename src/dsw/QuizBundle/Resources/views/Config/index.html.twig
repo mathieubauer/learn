@@ -1,0 +1,42 @@
+{% extends "dswQuizBundle::layout.html.twig" %}
+
+{% block dsw_quiz_content %}
+<div class="container my-5">
+   
+    <h1>Configs list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for config in configs %}
+            <tr>
+                <td><a href="{{ path('quiz_config_show', { 'id': config.id }) }}">{{ config.id }}</a></td>
+                <td>{{ config.name }}</td>
+                <td>{{ config.value }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('quiz_config_show', { 'id': config.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('quiz_config_edit', { 'id': config.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('quiz_config_new') }}" class="btn btn-primary mt-3">Créer une nouvelle configuration</a><br>
+    <a href="{{ path('dsw_quiz_admin') }}" class="btn btn-secondary mt-3">Retour à l'administration</a>
+    
+</div>
+{% endblock %}

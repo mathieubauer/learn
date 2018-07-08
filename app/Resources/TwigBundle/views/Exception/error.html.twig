@@ -1,0 +1,24 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
+{% extends "dswAmpliBundle::layout_errors.html.twig" %}
+
+{% block dsw_ampli_content %}
+  
+    <div class="landing_page">
+    <div class="container py-5">
+        
+        <div class="text-md-left text-center">
+        <h1 class="display-3 mt-3">Un problème est survenu</h1>
+        <h2>Le serveur a renvoyé les informations suivantes : "{{ status_code }} {{ status_text }}".</h2>
+        <p>N'hésitez pas à nous informer du problème.</p>
+       
+        <a class="btn btn-primary btn-xl my-4" href="{{ path('dsw_ampli_landing') }}">Retour à l'accueil</a><br>
+        </div>
+        
+    </div>    
+    </div>    
+   
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {# ... #}
+    {% endif %}
+    
+{% endblock %}

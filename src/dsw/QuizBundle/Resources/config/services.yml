@@ -1,0 +1,4 @@
+services:
+#    dsw_quiz.example:
+#        class: dsw\QuizBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

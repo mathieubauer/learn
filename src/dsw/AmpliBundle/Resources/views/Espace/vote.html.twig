@@ -1,0 +1,172 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Proposez, votez !{% endblock %}
+{% block dsw_ampli_jumbotron %}
+    <h1>{{ espace.titre }}</h1>
+    <h2 class="soustitre mb-0">Proposez, votez !</h2>
+{% endblock %}
+
+{% block dsw_ampli_content %}
+
+    {% if form_errors(form.titre) %}
+    <div class="container-fluid">
+    <div class="alert alert-dismissible fade show alert-primary mt-3" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="mb-0">{{ form_errors(form.titre) }}</div>
+    </div>
+    </div>
+    {% endif %}
+    
+    {% if form_errors(form.description) %}
+    <div class="container-fluid">
+    <div class="alert alert-dismissible fade show alert-primary mt-3" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="mb-0">{{ form_errors(form.description) }}</div>
+    </div>
+    </div>
+    {% endif %}
+   
+<div class="container mt-5 idee_liste_vote">
+   
+    <div class="counter">
+        {{ listIdees|length }}&nbsp;<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+    </div>
+    
+    <div class="grid">
+    <div class="grid-sizer col-md-4"></div>
+    
+    {% for idee in listIdees %}
+       
+        {% set typeCoeur = 'fa fa-heart-o fa-2x' %}
+        {% set classCoeur = 'unliked' %}
+       
+        {% if user %}
+        {% for coeur in idee.coeurs %}
+            {% if coeur.user.id == user.id %}
+                {% set typeCoeur = 'fa fa-heart fa-2x' %}
+                {% set classCoeur = 'liked text-tertiary' %}
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+        <div class="grid-item col-md-4">
+        <div class="grid-item-content">
+        <div class="card mb-3">
+            
+            <!-- <div class="card-header idee_header text-center">
+                Catégorie 
+            </div> -->
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0">{{ idee.titre }}</h4>
+                    {% if idee.categorie.titre is defined %}
+                    <strong class="text-primary border border-primary p-1 ml-3 category_size">{{ idee.categorie.titre|upper }}</strong>
+                    {% endif %}
+                </div>
+                <p class="card-text">{{ idee.description|nl2br }}</p>
+            </div>
+            
+            <hr class="hr_thin">
+            
+            <div class="card-body py-2 card_infos">
+                <div class="d-flex justify-content-between align-items-center">
+                       
+                    <div class="text-truncate">
+                        <span class="fa fa-user"></span>&nbsp; {{ idee.user.username }}
+                        {% if idee.user.username == app.user.username %}
+                            <a href="{{ path('ampli_idee_edit_user', { 'id': idee.id }) }}" class="hidden_link cliquable ml-3"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="{{ path('ampli_idee_delete_user', { 'id': idee.id }) }}" class="hidden_link cliquable ml-3"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        {% endif %}
+                    </div>
+                    
+                    {% if espace.withCoeurs == 1 %}
+                    <div class="ml-auto d-flex justify-content-between align-items-center">
+                       
+                        <span id="nblikes_{{ idee.id }}" class="mr-3 text-truncate">
+                            {{ idee.coeurs|length }} J'aime
+                        </span>
+                        
+                        <span id="coeur_{{ idee.id }}" class="{{ classCoeur }} text-tertiaryZZ">
+                            <span class="cliquable {{ typeCoeur }}"></span>
+                        </span>
+                        
+                    </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+                
+        </div>
+        </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+    
+</div> 
+   
+<!-- Ajout idée ######################### -->
+ 
+{% if espace.withIdees == 1 %}
+  
+<button class="btn btn-tertiary button_fixed" id="bouton_idee" data-toggle="modal" data-target="#modal_idee">
+    <span class="fa fa-plus fa-2x"></span>
+</button>
+
+<!-- Modal nouvelle idée -->
+
+<div class="modal fade" id="modal_idee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Proposez votre idée !</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+        {{ form_start(form) }}
+           
+            {% if form.categorie is defined %}
+            <div class="row">
+            <div class="mb-3 col-md-4">{{ form_widget(form.categorie) }}</div>
+            </div>
+            {% endif %}
+            
+            <div class="mb-3">{{ form_widget(form.titre) }}</div>
+            
+            {{ form_errors(form.titre) }}
+            
+            
+            <div class="mb-1">{{ form_widget(form.description) }}</div>
+            <div class="mb-3 text-right"><span id="chars">140</span> / 140</div>
+            {{ form_errors(form.description) }}
+            
+        <input type="submit" value="Proposer !" class="btn btn-primary" />
+        
+        {{ form_end(form) }}
+        </div>
+
+    </div>
+</div>
+</div>
+
+{% endif %}
+
+<!-- Pied de page #########################    
+    
+<div class="jumbotron jumbotron-fluid mt-5 mb-0 row">
+<div class="container">
+<p>Vous avez terminé de voter ?</p>
+<a class="btn btn-secondary" href="{{ path('dsw_ampli_viewEspace', {'id': espace.id}) }}">Retour à l'accueil</a>
+</div> 
+</div> -->
+    
+{% endblock %}

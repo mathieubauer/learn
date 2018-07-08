@@ -1,0 +1,45 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Suivi des connexions{% endblock %}
+{% block dsw_learn_content %} 
+    
+    <a href="{{ path('dsw_ampli_admin_user') }}" class="btn btn-secondary mb-5">Gérer les utilisateurs</a>
+
+    <h1>Modules consultés</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Email</th>
+                <th>Module</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for track in tracks|reverse %}
+            <tr>
+                <td><a href="{{ path('track_show', { 'id': track.id }) }}">{{ track.id }}</a></td>
+                <td>{{ track.user.username }}</td>
+                <td>{{ track.user.email }}</td>
+                <td>{{ track.module.name }}</td>
+                <td>{% if track.date %}{{ track.date|date('d/m/Y H:i:s') }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('track_show', { 'id': track.id }) }}">show</a>
+                    <a href="{{ path('track_edit', { 'id': track.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <!--
+    <ul>
+        <li>
+            <a href="{{ path('track_new') }}">Create a new track</a>
+        </li>
+    </ul>
+    -->
+    
+{% endblock %}

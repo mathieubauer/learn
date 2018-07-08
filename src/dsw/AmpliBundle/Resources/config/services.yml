@@ -1,0 +1,12 @@
+services:
+    dsw_ampli.email.espace_mailer:
+        class: dsw\AmpliBundle\Email\EspaceMailer
+        arguments:
+            - "@mailer"
+    
+    dsw_ampli.doctrine_listener.espace_creation:
+        class: dsw\AmpliBundle\DoctrineListener\EspaceCreationListener
+        arguments:
+            - "@dsw_ampli.email.espace_mailer"
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

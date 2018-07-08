@@ -1,0 +1,46 @@
+{% extends "dswEvalBundle::layout.html.twig" %}
+{% block title %}{{ parent() }}{% endblock %}
+{% block dsw_eval_content %}
+
+   
+    <h1>Evaluations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Evalué</th>
+                <th>Evaluateur(s)</th>
+                <th>Sexe</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evaluation in evaluations %}
+            <tr>
+                <td><a href="{{ path('eval_evaluation_show', { 'id': evaluation.id }) }}">{{ evaluation.id }}</a></td>
+                <td>{{ evaluation.evalue }}</td>
+                <td>
+                    {% for evaluateur in evaluation.evaluateurs %}
+                    {{ evaluateur }}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ evaluation.sexe }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('eval_evaluation_show', { 'id': evaluation.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('eval_evaluation_edit', { 'id': evaluation.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('eval_evaluation_new') }}" class="btn btn-primary">Create a new evaluation</a>
+    
+{% endblock %}

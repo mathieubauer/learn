@@ -1,0 +1,27 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Supprimer une idée{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+
+    <h1>Supprimer une idée</h1>
+
+    <p>Etes-vous certain de vouloir supprimer l'idée "{{ idee.titre }}" ainsi que les contributions et likes correspondants ?</p>
+
+    {# On met l'id de l'annonce dans la route de l'action du formulaire #}
+    <form action="{{ path('ampli_idee_delete_user', {'id': idee.id}) }}" method="post">
+    
+    <a href="{{ path('dsw_ampli_vote', {'id': idee.espace.id}) }}" class="btn btn-primary">
+    Annuler
+    </a>
+    
+    {# Ici j'ai écrit le bouton de soumission à la main #}
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    
+    {# Ceci va générer le champ CSRF #}
+    {{ form_rest(form) }}
+    </form>
+    
+</div>
+{% endblock %}

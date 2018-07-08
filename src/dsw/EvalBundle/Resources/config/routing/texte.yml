@@ -1,0 +1,24 @@
+eval_texte_index:
+    path:     /
+    defaults: { _controller: "dswEvalBundle:Texte:index" }
+    methods:  GET
+
+eval_texte_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswEvalBundle:Texte:show" }
+    methods:  GET
+
+eval_texte_new:
+    path:     /new
+    defaults: { _controller: "dswEvalBundle:Texte:new" }
+    methods:  [GET, POST]
+
+eval_texte_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswEvalBundle:Texte:edit" }
+    methods:  [GET, POST]
+
+eval_texte_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswEvalBundle:Texte:delete" }
+    methods:  DELETE

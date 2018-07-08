@@ -1,0 +1,17 @@
+services:
+#    dsw_learn.example:
+#        class: dsw\LearnBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+# src/OC/PlatformBundle/Resources/config/services.yml
+
+#     dsw_platform.track.track_adder:
+#         class: dsw\LearnBundle\Track\TrackAdder
+
+#     dsw_platform.track.listener:
+#         class: dsw\LearnBundle\Track\TrackListener
+#         arguments:
+#             - "@oc_platform.beta.html_adder"
+#             - "2017-06-01"
+#         tags:
+#             - { name: kernel.event_listener, event: kernel.response, method: processTrack }

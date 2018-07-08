@@ -1,0 +1,226 @@
+{% extends "dswLearnBundle::layout_fluid.html.twig" %}
+{% block title %}{{ parent() }} - {{ module.course.name }}{% endblock %}
+{% block dsw_learn_content %}
+  
+<div class="row">
+
+{# LE MENU COLLAPSABLE EST DANS LE LAYOUT #}
+
+   
+{# VOLET DE GAUCHE - NAV #}       
+ 
+<nav class="col-md-3 col-lg-2 d-none d-md-block bg_sidebar sidebar">
+<div class="sidebar-sticky pb-5">
+   
+    {% if module.course.logo %}
+    <div class="p-3">
+        <img src="{{ module.course.logo }}" class="img-fluid" alt="logo">
+    </div>
+    {% endif %}
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted font-weight-bold">
+    <span>{{ module.course.name }}</span>
+    </h6>
+
+    <ul class="nav flex-column">
+    {% for module_menu in sorted_modules %}
+    
+    {% if module_menu.titre %}
+    
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
+        <span>{{ module_menu.name }}</span>
+        </h6>
+    
+    {% else %}
+    
+        <li class="nav-item">
+            <a class="nav-link {% if not module_menu.open %}desactive{% endif %} {% if module_menu == module %}active{% endif %}" href="{{ path('module_play', {'id': module_menu.id }) }}">
+                <div class="d-flex flex-row align-items-centerZZ">
+                   <span>
+                        <i class="fas {% if module_menu.picto %}{{ module_menu.picto }}{% else %}fas fa-arrow-right{% endif %} fa-fw mr-2"></i>
+                    </span>
+                    <span>
+                        {{ module_menu.name }}
+                    </span>
+                </div>
+            </a>
+        </li>
+    
+    {% endif %}
+    
+    {% endfor %}
+    </ul>
+
+</div>
+</nav>
+
+
+{# ESPACE CENTRAL - MAIN #}
+       
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+<div class="row justify-content-center">
+<div class="col-md-8">
+    
+    {# Affiche le module unique #}
+    
+        {# <h1>{{ module.course.name }}</h1> #}
+        {# <h1>{{ module.name }}</h1> #}
+        
+        {% for learner in module.course.learners %}
+        {{ learner.username }}
+        {% endfor %}
+        
+        {% for unit in units %}
+          
+            <div class="row">
+           
+            {# <hr> #}
+            {# <h3>{{ unit.name }}</h3> #}
+            
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-md-10">
+            {% else %}
+                <div class="col-12">
+            {% endif %}
+            
+                {{ include("dswLearnBundle:Unit:loop.html.twig") }}
+            
+            {% if is_granted('ROLE_ADMIN') %}
+                </div>
+                <div class="col-md-2 text-right">
+                <a href="{{ path('unit_edit', {'id': unit.id }) }}" class="btn btn-learn"><i class="fas fa-edit"></i></a>
+                </div>
+            {% else %}
+                </div>
+            {% endif %}
+            
+            </div>
+            
+        {% else  %}
+        
+            <p>Il n'y a pas encore de contenus dans ce module.</p>
+        
+        {% endfor %}
+        
+        {% if next %}
+        <div class="text-right">
+        <a href="{{ path('module_play', {'id': next.id }) }}" class="btn btn-learn my-3">Continuer<i class="fas fa-caret-right ml-2"></i></a>
+        </div>
+        {% endif %}
+        
+        {% if module.chat %}
+        
+        <div id="forum" class="mt-4 p-4 bg_forum mb-5">
+        
+        <h1>Commentaires</h1>
+
+        <ul class="list-unstyled">
+        {% for message in module.messages %}
+            
+            <li class="media mb-3">
+            <img class="d-flex mr-3 rounded-circle" src="https://i2.wp.com/vivea.lecube.io/wp-content/themes/storyspooc2/library/images/cham_avatars/cham_avatar5.jpg" alt="Generic placeholder image" height="42" width="42">
+            
+            <div class="media-body">
+            
+                <div class="d-flex justify-content-between align-items-center mb-1">
+
+                <strong class="font-weight-bold">
+                {% if message.user.firstname %}
+                {{ message.user.firstname }} {{ message.user.lastname }}
+                {% else %}
+                {{ message.user.username }}
+                {% endif %}
+                </strong>
+
+                <small class="text-muted">Posté le {{ message.date|date("m/d/Y") }}</small>
+
+                </div>
+
+                <p class="forum_texte mb-0 mt-1">{{ message.content|nl2br }}</p>
+            
+            </div>
+            </li>
+
+            {#<div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-center mb-1">
+
+            <strong class="">
+            {% if message.user.firstname %}
+            {{ message.user.firstname }} {{ message.user.lastname }}
+            {% else %}
+            {{ message.user.username }}
+            {% endif %}
+            </strong>
+
+            <small class="text-muted">Posté le {{ message.date|date("m/d/Y") }}</small>
+
+            </div>
+
+            <p class="forum_texte mb-0 mt-2">{{ message.content|nl2br }}</p>
+
+            </div>
+            <hr class="hr_thin"> #}
+
+        {% else %}
+        
+            <p>Personne n'a encore commenté ce module. Et si vous commenciez ?</p>
+        
+        {% endfor %}
+        </ul>
+        
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {{ form_start(form_message) }}
+        <div class=" row d-flex justify-content-between align-self-center">
+            <div class="col-md-10">
+            {{ form_widget(form_message.content) }}
+            </div>
+            <button class="btn btn-secondary" type="submit">Envoyer</button>
+            
+        </div>
+        {{ form_end(form_message) }}
+        {% else %}
+        
+            <p>Vous devez être connecté pour contribuer. <a href="{{ path('module_login', {'id': module.id}) }}" class="">Allez !</a></p>
+        
+        {% endif %}
+        
+        </div>
+        
+        {% endif %}
+        
+        
+        {% if is_granted('ROLE_ADMIN') %}
+            
+            <hr>
+            
+            {{ include("dswLearnBundle:Unit:form_new.html.twig") }}
+            
+            <a href="{{ path('module_build', {'id': module.id}) }}" class="btn btn-primary my-3">
+                <i class="far fa-file fa-lg mr-2"></i>Modifier le module
+            </a>
+            
+            <a href="{{ path('course_build', {'id': module.course.id}) }}" class="btn btn-primary my-3">
+                <i class="far fa-folder-open fa-lg mr-2"></i>Modifier le cours
+            </a>
+            
+        {% endif %}
+        
+</div>
+</div>
+
+</main>   
+</div>  
+{% endblock %}
+
+
+{% block footer %}
+
+    {% if module.course.code == 'es' %}
+    <footer class="footer fixed-bottom bg-white text-center d-none justify-content-center align-items-center d-md-flex">
+        <span class="text-muted">Entreprise&Société, le think lab d'</span>
+        <img src="https://preview.ibb.co/nECCFT/logo_e_p_maigre_haute_def.jpg" alt="E&P" width="220">
+    </footer>
+    {% endif %}
+
+{% endblock %}

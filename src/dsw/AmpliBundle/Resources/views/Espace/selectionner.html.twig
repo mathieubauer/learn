@@ -1,0 +1,178 @@
+{% extends "dswAmpliBundle::layout2.html.twig" %}
+{% block title %}{{ parent() }} - Sélectionnez vos idées préférées{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+   
+<div class="container mt-md-5 mt-3 px-md-3 px-0 idee_liste_selection">
+<div class="main-carousel col-md-6 mx-auto">
+   
+        <div id="" class="item_0 draggable2">
+        <div id="card_first" class="card mb-3 item_0">
+            
+            <h4 class="card-header text-white bg-primary text-center py-4">Sélection des idées</h4>
+            
+            <div class="card-body my-3">
+                <div class="row">
+                <div class="col-6 text-center">
+                    <strong class="card-text">Vous n'aimez pas ?</strong><br>
+                    <span class="card-text">Glissez à gauche</span><br>
+                    <span class="fa fa-arrow-left fa-2x mt-3 text-center"></span>
+                </div>
+                <div class="col-6 text-right text-center">
+                    <strong class="card-text">Vous aimez ?</strong><br>
+                    <span class="card-text">Glissez à droite</span><br>
+                    <span class="fa fa-arrow-right fa-2x mt-3 text-center"></span>
+                </div>
+                </div>
+            </div>
+                
+            <hr class="hr_thin">
+                
+            <div class="card-body py-2 card_infos">  
+                <div class="text-center">
+                    <span class="card-text">Essayez !</span>
+                </div>
+            </div>
+                
+        </div>
+        
+        <div class="row">
+           
+            <div class="col-6 text-center">
+            <button id="" class="btn btn-white text-tertiary button_round croix">
+                <span class="fa fa-times fa-2x"></span>
+            </button>
+                </div>
+            <div class="col-6 text-center">
+            <button id="" class="btn btn-white text-tertiary button_round coeur">
+                <span class="fa fa-heart fa-2x"></span>
+            </button>
+            </div>
+        
+        </div>
+        
+        </div>
+    
+    {% for idee in listIdees %}
+       
+        {% set typeCoeur = 'fa fa-heart-o fa-2x' %}
+        {% set classCoeur = 'unliked' %}
+       
+        {% if user %}
+        {% for coeur in idee.coeurs %}
+            {% if coeur.user.id == user.id %}
+                {% set typeCoeur = 'fa fa-heart fa-2x' %}
+                {% set classCoeur = 'liked' %}
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+        <!-- <div class="carousel-cell"> -->
+        <div id="card_{{ idee.id }}" class="item_{{ loop.index }} draggable2 hidden">
+        <div class="card mb-3">
+           
+            {% if idee.imgProjet %}
+                <img class="card-img-top img-fluid cover_180" src="{{ asset('/uploads/img/' ~ idee.imgProjet) | imagine_filter('ideas_wall') }}" alt="Image projet">
+            {% endif %}
+            
+            <!-- <div class="card-header idee_header text-center">
+                Catégorie 
+            </div> -->
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0">{{ idee.titre }}</h4>
+                    {% if idee.categorie.titre is defined %}
+                    <strong class="text-primary border border-primary p-1 ml-3 category_size">{{ idee.categorie.titre|upper }}</strong>
+                    {% endif %}
+                </div>
+                <p class="card-text">{{ idee.description|nl2br }}</p>
+            </div>
+            
+            <hr class="hr_thin">
+            
+            <div class="card-body py-2 card_infos">
+                <div class="d-flex justify-content-between align-items-center">
+                       
+                    <div class="">
+                        <span class="fa fa-user"></span>&nbsp; {{ idee.user.username }}
+                        <!-- {% if idee.user.username == app.user.username %}
+                            <a href="{{ path('ampli_idee_delete_user', { 'id': idee.id }) }}" class="hidden_link cliquable ml-3"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        {% endif %} -->
+                    </div>
+                    
+                    {% if espace.withCoeurs == 1 %}
+                    <div class="ml-auto">
+                       
+                        <!-- <span id="nblikes_{{ idee.id }}">
+                            {{ idee.coeurs|length }} 
+                        </span>  -->
+                        
+                        <span id="coeur_{{ idee.id }}" class="{{ classCoeur }} text-tertiary">
+                            <span class="cliquable {{ typeCoeur }}"></span>
+                        </span>
+                        
+                        <!-- 
+                        <span id="croix_{{ idee.id }}" class="croix"><span class="cliquable fa fa-times-circle-o fa-2x"></span></span> 
+                        <span id="coeur_{{ idee.id }}" class="coeur"><span class="cliquable fa fa-check-circle-o fa-2x"></span></span> 
+                        <span id="coeur_{{ idee.id }}" class="coeur ml-3"><span class="cliquable fa fa-arrow-circle-o-right fa-2x">
+                        </span></span>
+                        -->
+                    </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+                
+        </div>
+        
+        
+        <div class="row">
+           
+            <div class="col-6 text-center">
+            <button id="" class="btn btn-white text-tertiary button_round croix">
+                <span class="fa fa-times fa-2x"></span>
+            </button>
+                </div>
+            <div class="col-6 text-center">
+            <button id="" class="btn btn-white text-tertiary button_round coeur">
+                <span class="fa fa-heart fa-2x"></span>
+            </button>
+            </div>
+        
+        </div>
+        
+        </div>
+        
+        <!-- </div> -->
+
+    {% endfor %}
+    
+        <div class="carousel-cell">
+        <div id="card_last" class="card text-white bg-info mb-3 item_{{ listIdees|length + 1 }} hidden">
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0">Vous avez vu toutes les idées</h4>
+                </div>
+                <p class="card-text">Merci !</p>
+                <a class="btn btn-secondary" href="{{ path('dsw_ampli_viewEspace', {'id': espace.id}) }}">Retour à l'accueil</a>
+            </div>
+                
+        </div>
+        </div>
+    
+</div> 
+</div> 
+
+<!-- Pied de page #########################    
+    
+<div class="jumbotron jumbotron-fluid mt-5 mb-0 row">
+<div class="container">
+<p>Vous avez terminé de voter ?</p>
+<a class="btn btn-secondary" href="{{ path('dsw_ampli_viewEspace', {'id': espace.id}) }}">Retour à l'accueil</a>
+</div> 
+</div> -->
+    
+{% endblock %}

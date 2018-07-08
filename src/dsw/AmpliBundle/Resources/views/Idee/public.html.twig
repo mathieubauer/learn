@@ -1,0 +1,364 @@
+{% extends "dswAmpliBundle::layout2.html.twig" %}
+{% block title %}{{ parent() }} - Des idées aux projets{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+   
+    <div class="row idee_page">
+    
+    {# Partie gauche ######################################## #}
+
+    <div class="col-lg-8">
+    <div class="card idee">
+
+        {% if idee.imgProjet %}
+            <img class="card-img img-fluid cover_300 pos_a" src="{{ asset('/uploads/img/' ~ idee.imgProjet) | imagine_filter('idea_show') }}" alt="Image projet">
+        {% else %}
+            <img class="card-img img-fluid cover_300 pos_a" src="{{ asset('bundles/dswampli/img/placeholder_projet.jpg') }}" alt="Image projet">
+        {% endif %}
+        
+        <div class="text_protection_top cover_300"></div>
+        
+        <div class="card-img-overlay text_protected cover_300">
+            <!-- <h4 class="theme">Ici thème</h4> --> 
+            <p class="titre_idee mb-3">{{ idee.titre }}</p>
+            <!-- <p class="likes">{{ idee.coeurs|length }} <span class="fa fa-heart"></span></p> -->
+        </div>
+
+        <div class="card-body p-5">
+            <p class="card-text lead">{{ idee.description|nl2br }}</p>
+            {% if idee.video %}
+            <div class="embed-responsive embed-responsive-16by9 offset-lg-2 col-lg-8 border-vid">
+                <video controls id="vid" class="embed-responsive-item" src="{{ idee.video }}"></video>
+            </div>
+            {% endif %}
+        </div>
+
+        <hr class="hr_thin">
+
+        <div class="card-body p-5">
+            <h3 class="mb-3">
+                {% if idee.espace.objectifsAlias %}
+                    {{ idee.espace.objectifsAlias }}
+                {% else %}
+                    Objectifs
+                {% endif %}
+            </h3>
+            <p class="mb-0">{{ idee.objectifs|nl2br }}</p>
+            <h3 class="mt-4 mb-3">
+                {% if idee.espace.methodeAlias %}
+                    {{ idee.espace.methodeAlias }}
+                {% else %}
+                    Méthode
+                {% endif %}
+            </h3>
+            <p class="mb-0">{{ idee.methode|nl2br }}</p>
+            <h3 class="mt-4 mb-3">
+                {% if idee.espace.calendrierAlias %}
+                    {{ idee.espace.calendrierAlias }}
+                {% else %}
+                    Calendrier
+                {% endif %}
+            </h3>
+            <p class="mb-0">{{ idee.calendrier|nl2br }}</p>
+        </div>
+
+        {% if idee.espace.withEquipe %}
+        <hr class="hr_thin">
+        <div class="card-body p-5">
+            <h3>L'équipe</h3>
+            <div class="col-md-6 col-xs-10 mx-auto">
+            <div class="card polaroid mb-3">
+                {% if idee.imgEquipe %}
+                    <img src="{{ asset('web/uploads/img/' ~ idee.imgEquipe) }}" class="card-img-top" alt="imageEquipe">
+                {% else %}
+                    <img src="{{ asset('bundles/dswampli/img/placeholder_team.jpg') }}" class="card-img-top" alt="imageEquipe">
+                {% endif %}
+                <div class="card-body">
+                {% if idee.equipe %}
+                    <p>Projet développé par {{ idee.equipe }}</p>
+                {% else %}
+                    <p>Idée proposée par {{ idee.user.username }}</p>
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+        <div class="row mt-1">
+        <div class="offset-lg-2 col-lg-8">
+
+            <!-- {% if is_granted('ROLE_AUTEUR') %}
+            <a href="{{ path('ampli_idee_edit', {'id': idee.id}) }}" class="btn btn-tertiary button_fixed">
+            <span class="fa fa-pencil fa-2x"></span>
+            </a>
+            {% endif %} -->
+
+            {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('ampli_idee_delete', {'id': idee.id}) }}" class="btn btn-primary mb-3">Supprimer le projet</a>
+            {% endif %}
+
+            <a href="{{ path('dsw_ampli_propulse', {'id': idee.espace.id}) }}" class="btn btn-dark mb-3">Retour aux projets</a>
+
+        </div>
+        </div>
+
+    </div>
+        
+        
+    {# Partie droite ######################################## #}
+    
+    {% if idee.espace.withCommentaires or idee.espace.withTemps %}
+    
+    <div class="col-lg-4">
+        
+        <div class="row">
+            
+            <div class="col-lg-12">
+              
+                {# <h1>Propulsez ce projet !</h1> #}
+                <h1>Contribuez à ce projet !</h1>
+                {% if idee.espace.publicQuestion %}
+                    <h3 class="soustitre">{{ idee.espace.publicQuestion }}</h3>
+                {% endif %}
+               
+                <div class="mb-2">
+                
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="d-flex justify-content-between">
+                
+                    {# J'aime ########## 
+                    <button class="btn btn-primary mr-1" id="" data-toggle="" data-target="">
+                        <span class="fa fa-heart"></span>
+                    </button>
+                    #}
+                
+                    {# Je commente ########## #}
+                    {% if idee.espace.withCommentaires %}
+                
+                    <button class="btn btn-primary mr-1" id="bouton_commentaire" data-toggle="modal" data-target="#modalCommentaire">
+                        <span class="fa fa-bullhorn"></span> Je commente
+                    </button>
+                    
+                    <!-- Modal -->
+                    
+                    <div class="modal fade" id="modalCommentaire" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                {# <h4 class="modal-title" id="myModalLabel">Un avis ? Une suggestion ?</h4> #}
+                                <h4 class="modal-title" id="myModalLabel">À vous !</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                            {{ form_start(form_commentaire) }}
+                                {{ form_widget(form_commentaire.content) }}
+                                <input type="submit" value="Envoyer" class="btn btn-primary mt-3" />
+                            {{ form_end(form_commentaire) }}
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                    {% endif %}
+                    
+                    
+                    {# Je participe (temps et compétences) ########## #}
+                    {% if idee.espace.withTemps %}
+                
+                    <button class="btn btn-primary mr-1" id="bouton_participation" data-toggle="modal" data-target="#modalPart">
+                        <span class="fa fa-users"></span> Je participe
+                    </button>
+                    
+                    <!-- Modal -->
+                    
+                    <div class="modal fade" id="modalPart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Je donne du temps et des compétences</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                            {{ form_start(form_participation) }}
+                                {{ form_widget(form_participation) }}
+                                <input type="submit" value="Je participe !" class="btn btn-primary" />
+                            {{ form_end(form_participation) }}
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                    {% endif %}
+                    
+                    {# Je finance ########## 
+                    <button class="btn btn-primary mr-1" id="" data-toggle="" data-target="">
+                        <span class="fa fa-eur"></span>
+                    </button>
+                    #}
+                    
+                </div>
+                
+                {% else %}
+                
+                    <p class="mb-1">Vous devez être connecté·e pour contribuer</p>
+                    <a href="{{ path('ampli_idee_public_connect', {'id': idee.id}) }}" class="btn btn-primary mr-1 mb-3">Je participe</a>
+                
+                {% endif %}
+
+                </div>
+                
+                
+                
+                <div id="forum" class="card mt-3">
+                
+                <div class="card-header"><strong class="col-xs-12">Dernières contributions</strong></div>
+                
+                {% if idee.espace.withTemps %}
+                {% for participation in idee.participations %}
+                
+                    <div class="card-body">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                       
+                        <strong class="">
+                        {% if participation.user.firstname %}
+                            <p class="mb-0">{{ participation.user.firstname }} {{ participation.user.lastname }}</p>
+                        {% else %}
+                            <p class="mb-0">{{ participation.user.username }}</p>
+                        {% endif %}
+                        </strong>
+                        
+                        <strong class="text-primary">{{ participation.temps }}h</strong>
+                        
+                        {# <small class="text-muted">Posté le 31/12/18</small>
+                        
+                        <strong class="text-primary border border-primary contribution_size">{{ participation.temps }} h</strong> #}
+                        
+                    </div>
+                    
+                    <p class="forum_texte mb-0 mt-2">{{ participation.competence|nl2br }}</p>
+                    
+                    </div>
+                    <hr class="hr_thin">
+                
+                {% endfor %}
+                {% endif %}
+    
+                {% if idee.espace.withCommentaires %}
+                {% for commentaire in idee.commentaires %}
+                
+                    <div class="card-body">
+                    
+                        <div class="d-flex align-items-center mb-1">
+
+                            <strong class="">
+                            {% if commentaire.user.firstname %}
+                                {{ commentaire.user.firstname }} {{ commentaire.user.lastname }}
+                            {% else %}
+                                {{ commentaire.user.username }}
+                            {% endif %}
+                            </strong>
+                            
+                            {% if app.user.username is defined %}
+                            {% if commentaire.user.username == app.user.username %}
+                            <small class="ml-2">
+                                <a href="{{ path('commentaire_edit', {'id': commentaire.id}) }}" class="hidden_link cliquable"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            </small>
+                            <small class="ml-2">
+                                <a href="{{ path('commentaire_delete', {'id': commentaire.id}) }}" class="hidden_link cliquable"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </small>
+                            {% endif %}
+                            {% endif %}
+                            
+                            <small class="text-muted ml-auto">Posté le {{ commentaire.date|date("d/m/Y") }}</small>
+                            
+                            {# <strong class="text-primary border border-primary contribution_size"><i class="fa fa-lightbulb-o"></i></strong> #}
+                            
+                        </div>
+
+                        <p class="forum_texte mb-0 mt-2">{{ commentaire.content|nl2br }}</p>
+                    
+                    </div>
+                    <hr class="hr_thin">
+                
+                {% endfor %}
+                {% endif %}
+                
+                {% if idee.commentaires is empty and idee.participations is empty %}
+                <div class="card-body">
+                    Il n'y a pas encore de contribution pour ce projet.
+                </div>
+                {% endif %}
+                
+                </div>
+                
+                {# Panel énergie 
+                <div class="card mt-2">
+                <div class="card-header"><strong class="col-xs-12">Energie</strong></div>
+                   
+                    <div class="card-block">
+                        <div class="meter dark" style="width: 100%;">
+                            <span style="width: <?php echo ($idee->getEnergie() + $energieMax * 0.1) / $energieMax * 85; ?>%;"></span>
+                        </div> 
+                    </div>
+                    
+                    
+                    <div class="card-block">
+                        <div class="row vdivide">
+                            <div class="col-md-4 text-xs-center">12 <span class="fa fa-heart"></span></div>
+                            <div class="col-md-4 text-xs-center">12 heure(s)</div>
+                            <div class="col-md-4 text-xs-center">12 000 €</div>
+                        </div>
+                    </div>
+                    
+                </div> -->
+                
+                <!-- Panel contributions 
+                <div class="card mt-2">
+                <div class="card-header"><strong class="col-xs-12">Contributions</strong></div>
+                <?php foreach ($financements as $financement) { ?>
+                
+                    <div class="card-block">
+                    <span class="offset-xs-8 col-xs-4"><?= nl2br($financement->getMontant()); ?> 000 €</span>
+                    </div>
+                    <hr class="hr_thin">
+                
+                <?php } ?>
+                
+                <?php foreach ($participations as $participation) { ?>
+                
+                    <div class="card-block">
+                    <span class="col-xs-8"><?= nl2br($participation->getCompetences()); ?></span>
+                    <span class="col-xs-4"><?= $participation->getTemps(); ?> heure(s)</span>
+                    </div>
+                    <hr class="hr_thin">
+                
+                <?php } ?>
+                </div> 
+                #}
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    {% endif %} {# Fin de la condition : Si rien à faire apparaître à droite #}
+    
+    </div>
+    
+</div>
+{% endblock %}

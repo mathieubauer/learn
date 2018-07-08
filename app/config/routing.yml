@@ -1,0 +1,121 @@
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+    
+# Avant fos_user pour les écouter avant !
+
+learn_security_login:
+    path: /learn/login
+    defaults:
+        _controller: dswUserBundle:Security:loginLearn
+        
+learn_security_check:
+    path: /learn/login_check
+    
+learn_security_logout:
+    path: /learn/logout
+    
+    
+learn_admin_security_login:
+    path: /learn/admin/login
+    defaults:
+        _controller: dswUserBundle:Security:loginLearnAdmin
+    
+learn_admin_security_check:
+    path: /learn/admin/login_check
+    
+learn_admin_security_logout:
+    path: /learn/admin/logout
+    
+    
+
+login:
+    path: /login_simple
+    defaults:
+        _controller: dswUserBundle:Security:loginSimple
+            
+        
+login_check:
+    path: /admin/login_check
+
+logout_simple:
+    path: /logout_simple
+
+# fos_uer
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+    
+    
+dsw_learn:
+    resource: "@dswLearnBundle/Resources/config/routing.yml"
+    prefix:   /learn
+    
+dsw_eval:
+    resource: "@dswEvalBundle/Resources/config/routing.yml"
+    prefix:   /eval
+
+dsw_feedback:
+    resource: "@dswFeedbackBundle/Resources/config/routing.yml"
+    prefix:   /feedback
+
+dsw_quiz:
+    resource: "@dswQuizBundle/Resources/config/routing.yml"
+    prefix:   /quiz
+    
+dsw_user:
+    resource: "@dswUserBundle/Resources/config/routing.yml"
+    prefix:   /user
+    
+dsw_ampli:
+    resource: "@dswAmpliBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+    
+    
+##quiz_login_check:
+##   path: /quiz/login_check
+   
+security_login_quiz:
+    path:  /quiz/login
+    defaults: { _controller: dswUserBundle:Registration:register }
+
+security_check_quiz:
+    path:  /quiz/login_check
+
+##security_logout_quiz:
+##    path:  /logout
+
+### SYSTEME D'AUTH MAISON
+
+
+
+login_admin:
+    path: /admin/login
+    defaults:
+        _controller: dswUserBundle:Security:loginAdmin
+
+
+
+
+# dsw_core:
+#     resource: "@dswCoreBundle/Resources/config/routing.yml"
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

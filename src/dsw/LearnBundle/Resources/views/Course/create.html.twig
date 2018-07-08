@@ -1,0 +1,26 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Création de cours{% endblock %}
+{% block dsw_learn_content %}
+  
+    <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+   
+    <h1>Création de cours</h1>
+    
+    <p>
+    Bienvenue dans l'outil de création de cours !<br>
+    Commencez par lui par donner un nom.
+    </p>
+
+    {{ form_start(form) }}
+       
+        <div class="mb-3">{{ form_widget(form.name) }}</div>
+
+        <button class="btn btn-learn" type="submit">Créer un cours</button>
+        
+    {{ form_end(form) }}
+    
+    </div>
+    </div>
+    
+{% endblock %}

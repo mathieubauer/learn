@@ -1,0 +1,143 @@
+dsw_ampli_landing:
+    path:     /
+    defaults: { _controller: dswAmpliBundle:Espace:landing }
+    
+dsw_ampli_homepage:
+    path:     /home/{id}
+    defaults: { _controller: dswAmpliBundle:Espace:home }
+    requirements:
+        id: \d+
+
+dsw_ampli_idee:
+    resource: "@dswAmpliBundle/Resources/config/routing/idee.yml"
+    prefix:   /idee
+    
+dsw_ampli_categorie:
+    resource: "@dswAmpliBundle/Resources/config/routing/categorie.yml"
+    prefix:   /categorie
+    
+dsw_ampli_commentaire:
+    resource: "@dswAmpliBundle/Resources/config/routing/commentaire.yml"
+    prefix:   /commentaire
+
+# dsw_ampli_enregistrement:
+#     resource: "@dswAmpliBundle/Resources/config/routing/enregistrement.yml"
+#     prefix:   /enregistrement
+
+# dsw_ampli_record:
+#     resource: "@dswAmpliBundle/Resources/config/routing/record.yml"
+#     prefix:   /record
+
+# dsw_ampli_question:
+#     resource: "@dswAmpliBundle/Resources/config/routing/question.yml"
+#     prefix:   /question
+
+
+
+dsw_ampli_admin:
+    path:     /admin
+    defaults: { _controller: dswAmpliBundle:Admin:index }
+    
+dsw_ampli_admin_espace:
+    path:     /admin/espace/{id}
+    defaults: { _controller: dswAmpliBundle:Admin:espace }
+    
+dsw_ampli_admin_idee:
+    path:     /admin/idee/{id}
+    defaults: { _controller: dswAmpliBundle:Admin:idee }
+    
+dsw_ampli_admin_user:
+    path:     /admin/user
+    defaults: { _controller: dswAmpliBundle:Admin:user }
+    
+dsw_ampli_admin_config:
+    path:     /admin/config
+    defaults: { _controller: dswAmpliBundle:Admin:config }
+
+
+    
+dsw_ampli_addEspace:
+    path:     /espace/add
+    defaults: { _controller: dswAmpliBundle:Espace:add }
+    
+
+# les quatre étapes
+    
+# 1. Ajout idée
+# Dans le fichier Idee
+# 
+
+ampli_idee_new_categorie:
+    path:     idee/new/{id}/{categorie}
+    defaults: { _controller: "dswAmpliBundle:Idee:new" }
+    methods:  [GET, POST]
+    
+    
+dsw_ampli_vote:
+    path:     /espace/{id}/ideation
+    defaults: { _controller: dswAmpliBundle:Espace:vote }
+    methods:  [GET, POST]
+    
+dsw_ampli_vote_categorie:
+    path:     /espace/{id}/ideation/{categorie}
+    defaults: { _controller: dswAmpliBundle:Espace:vote }
+    methods:  [GET, POST]
+    
+dsw_ampli_develop:
+    path:     /espace/{id}/developper
+    defaults: { _controller: dswAmpliBundle:Espace:develop }
+    
+dsw_ampli_propulse:
+    path:     /espace/{id}/propulser
+    defaults: { _controller: dswAmpliBundle:Espace:propulse }
+    
+dsw_ampli_selectionner:
+    path:     /espace/{id}/selectionner
+    defaults: { _controller: dswAmpliBundle:Espace:selectionner }
+    
+dsw_ampli_espace_animateur:
+    path:     /espace/{id}/animateur
+    defaults: { _controller: dswAmpliBundle:Espace:animateur }
+
+
+# les vues simples
+
+dsw_ampli_viewEspace:
+    path:     /espace/{id}
+    defaults: { _controller: dswAmpliBundle:Espace:view }
+    requirements:
+        id: \d+
+    
+dsw_ampli_espace_demo:
+    path:     /espace/demo
+    defaults: { _controller: dswAmpliBundle:Espace:demo }
+
+dsw_ampli_idee_coeur_toggle:
+    path:     idee/coeur/toggle/{id}
+    defaults: { _controller: dswAmpliBundle:Coeur:toggle }
+    
+dsw_ampli_idee_coeur_add:
+    path:     idee/coeur/add/{id}
+    defaults: { _controller: dswAmpliBundle:Coeur:add }
+    
+dsw_ampli_idee_coeur_remove:
+    path:     idee/coeur/remove/{id}
+    defaults: { _controller: dswAmpliBundle:Coeur:remove }
+    
+dsw_ampli_idee_selection_toggle:
+    path:     idee/selection/toggle/{id}
+    defaults: { _controller: dswAmpliBundle:Idee:toggle }
+    
+    
+# Special clients - doit rester à la fin (et ne pas être nommé admin, espace, etc.)
+
+dsw_ampli_special:
+    path:     /{slug}
+    defaults: { _controller: dswAmpliBundle:Espace:special }
+
+dsw_ampli_edf:
+    path:     /edf/{id}
+    defaults: { _controller: dswAmpliBundle:Espace:home }
+    requirements:
+        id: \d+
+    

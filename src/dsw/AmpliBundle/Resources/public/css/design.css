@@ -1,0 +1,63 @@
+/* Hello Maciel ! */
+
+.landing_page {
+    background-image: url(../img/chaises.jpg);
+    width: 100%;
+    height: 100vh;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+    background-position-y: top;
+}
+
+
+
+.landing_page_learn {
+    
+    /* background-image: url(../img/comptoir.jpg); */
+    /* background-image: url(https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2014/09/03/101968066-186741911.jpg); */
+    
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    width: 100%;
+    height: 100vh;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+    background-position-y: top;
+    
+}
+
+.learn_landing_top {
+    
+    background-image: 
+    linear-gradient(
+        /* to bottom, */
+        rgba(8, 34, 52, 0.4), /* 8, 34, 52 est la couleur bg-learn */
+        rgba(8, 34, 52, 0.4)
+    ),
+    url(../img/workstation.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center; 
+    
+}
+
+.py_6 {
+    padding-top: 5rem!important;
+    padding-bottom: 5rem!important;
+}
+
+.background_gradient_learn {
+    
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Créer une ressource</h1>
+    
+    {{ form_start(form) }}
+       
+        {{ form_errors(form) }}
+        
+        <div class="mb-3">
+        {{ form_label(form.module) }}
+        {{ form_widget(form.module) }}
+        </div>
+
+        <div class="mb-3">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        </div>
+        
+        <div class="mb-3 typo_code">
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content) }}
+        </div>
+        
+        <div class="mb-3">
+        {{ form_label(form.type) }}
+        {{ form_widget(form.type) }}
+        </div>
+
+        <input type="submit" value="Créer une ressource" class="btn btn-primary" />
+        
+    {{ form_end(form) }}
+
+    <a href="{{ path('unit_index') }}">Back to the list</a>
+    
+{% endblock %}

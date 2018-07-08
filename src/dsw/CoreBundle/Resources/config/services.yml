@@ -1,0 +1,4 @@
+services:
+#    dsw_core.example:
+#        class: dsw\CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

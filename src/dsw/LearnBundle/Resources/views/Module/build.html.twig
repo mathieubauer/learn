@@ -1,0 +1,146 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - {{ module.course.name }} : {{ module.name }}{% endblock %}
+{% block dsw_learn_content %}
+  
+<div class="row justify-content-center">
+<div class="col-md-10">
+   
+    <h1>Constructeur de module</h1>
+    
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb px-4">
+        <li class="breadcrumb-item">
+        <a href="{{ path('course_build', {'id': module.course.id }) }}">{{ module.course.name }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+        {{ module.name }}
+        </li>
+        <li class="text-right">
+        <i class="fas {% if module.picto %}{{ module.picto }}{% else %}fas fa-arrow-right{% endif %} fa-fw ml-2 text-right"></i>
+        </li>
+        
+        
+        
+    </ol>
+    
+    </nav>
+    
+    <div class="breadcrumb p-4 mb-5">
+    <h3 class="mb-4">Paramètres du module</h3>
+
+    {{ form_start(edit_form) }}
+      
+        <div class="row d-flex align-items-center align-self-center mb-3">
+            <div class="col-md-3"><strong>Titre</strong></div>
+            <div class="col-md-9">{{ form_widget(edit_form.name) }}</div>
+        </div>
+        
+        <div class="row d-flex align-items-center align-self-center mb-3">
+            <div class="col-md-3"><strong>Picto du menu</strong></div>
+            <div class="col-md-9">{{ form_widget(edit_form.picto) }}</div>
+        </div>
+        
+        <div class="row d-flex align-items-center align-self-center mb-3">
+            <div class="col-md-3"><strong>Forum de discussion</strong></div>
+            <div class="col-md-9">{{ form_widget(edit_form.chat) }}</div>
+        </div>
+        
+        <div class="row d-flex align-items-center align-self-center mb-3">
+            <div class="col-md-3"><strong>Accessibilité du module</strong></div>
+            <div class="col-md-9">{{ form_widget(edit_form.open) }}</div>
+        </div> 
+        
+        <div class="ml-0">
+            <button class="btn btn-learn ml-0" type="submit">
+                <i class="far fa-save fa-lg mr-2"></i>Enregistrer les modifications
+            </button>
+        </div>
+       
+    {{ form_end(edit_form) }}
+    
+    </div>
+    
+    {% for unit in units %}
+
+        <div class="row mb-4">
+        <div class="col-md-8">
+        
+            {{ include("dswLearnBundle:Unit:loop.html.twig") }}
+                
+        </div>
+        <div class="col-md-4">
+        
+        <a href="{{ path('unit_edit', {'id': unit.id }) }}" class="btn btn-learn btn-sm-edit mt-0 mx-1"><i class="fas fa-edit"></i></a>
+        
+        {% if not loop.last %}
+        <a href="{{ path('unit_down', {'id': unit.id }) }}" class="btn btn-learn btn-sm-edit mt-0 mx-1"><i class="fas fa-arrow-down"></i></a>
+        {% endif %}
+        
+        {% if not loop.first %}
+        <a href="{{ path('unit_up', {'id': unit.id }) }}" class="btn btn-learn btn-sm-edit mt-0 mx-1"><i class="fas fa-arrow-up"></i></a>
+        {% endif %}
+        
+        <a href="{{ path('unit_delete', {'id': unit.id }) }}" class="btn btn-danger btn-sm-edit mt-0 mx-1"><i class="fas fa-trash"></i></a>
+        
+            </div>
+            </div>
+    
+    {% else %}
+        <p>Il n'y a encore aucun contenu associé à ce module. Commencez par en ajouter un !</p>
+    {% endfor %}
+    
+<!-- Ajout unité image ######################### -->
+    
+    {#
+    <button class="btn btn-learn mt-5" id="" data-toggle="modal" data-target="#modal_unit_image">
+        Ajouter une image
+    </button>
+    
+    <div class="modal fade" id="modal_unit_image" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="">
+    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <div class="modal-body">
+    
+        Hoy
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    #}
+    
+    
+<!-- Ajout unité ######################### -->
+    
+    <hr>
+    {{ include("dswLearnBundle:Unit:form_new.html.twig") }}
+    
+    
+<!-- Affichages ######################### -->
+   
+    <br>
+    <!-- <a href="{{ path('course_build', {'id': module.course.id}) }}" class="btn btn-dark mt-2 mb-3">Retour au cours</a> -->
+    <a href="{{ path('course_play', {'id': module.course.id}) }}" class="btn btn-dark mt-2 mb-3"> 
+        <i class="fas fa-eye fa-lg mr-2"></i>Afficher le cours
+    </a>
+    <a href="{{ path('module_play', {'id': module.id}) }}" class="btn btn-dark mt-2 mb-3"> 
+        <i class="fas fa-eye fa-lg mr-2"></i>Afficher le module
+    </a>
+    
+    <hr>
+    
+
+<!-- Suppression ######################### -->    
+
+    <div class="text-right">
+    {{ form_start(delete_form) }}
+        <button class="btn btn-danger mt-3" type="submit">
+            <i class="fas fa-trash fa-lg mr-2"></i>Supprimer le module
+        </button>
+    {{ form_end(delete_form) }}
+    </div>
+    
+</div>
+</div>
+    
+{% endblock %}

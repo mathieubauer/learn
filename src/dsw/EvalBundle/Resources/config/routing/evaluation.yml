@@ -1,0 +1,24 @@
+eval_evaluation_index:
+    path:     /
+    defaults: { _controller: "dswEvalBundle:Evaluation:index" }
+    methods:  GET
+
+eval_evaluation_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswEvalBundle:Evaluation:show" }
+    methods:  GET
+
+eval_evaluation_new:
+    path:     /new
+    defaults: { _controller: "dswEvalBundle:Evaluation:new" }
+    methods:  [GET, POST]
+
+eval_evaluation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswEvalBundle:Evaluation:edit" }
+    methods:  [GET, POST]
+
+eval_evaluation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswEvalBundle:Evaluation:delete" }
+    methods:  DELETE

@@ -1,0 +1,35 @@
+unit_index:
+    path:     /
+    defaults: { _controller: "dswLearnBundle:Unit:index" }
+    methods:  GET
+
+unit_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswLearnBundle:Unit:show" }
+    methods:  GET
+
+unit_new:
+    path:     /new
+    defaults: { _controller: "dswLearnBundle:Unit:new" }
+    methods:  [GET, POST]
+
+unit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswLearnBundle:Unit:edit" }
+    methods:  [GET, POST]
+
+unit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswLearnBundle:Unit:delete" }
+    methods:  [GET, DELETE]
+
+
+unit_up:
+    path:     /{id}/up
+    defaults: { _controller: "dswLearnBundle:Unit:up" }
+    methods:  [GET, POST]
+    
+unit_down:
+    path:     /{id}/down
+    defaults: { _controller: "dswLearnBundle:Unit:down" }
+    methods:  [GET, POST]

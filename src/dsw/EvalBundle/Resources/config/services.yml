@@ -1,0 +1,4 @@
+services:
+#    dsw_eval.example:
+#        class: dsw\EvalBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

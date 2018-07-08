@@ -1,0 +1,24 @@
+quiz_answer_index:
+    path:     /
+    defaults: { _controller: "dswQuizBundle:Answer:index" }
+    methods:  GET
+
+quiz_answer_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswQuizBundle:Answer:show" }
+    methods:  GET
+
+quiz_answer_new:
+    path:     /new
+    defaults: { _controller: "dswQuizBundle:Answer:new" }
+    methods:  [GET, POST]
+
+quiz_answer_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswQuizBundle:Answer:edit" }
+    methods:  [GET, POST]
+
+quiz_answer_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswQuizBundle:Answer:delete" }
+    methods:  DELETE

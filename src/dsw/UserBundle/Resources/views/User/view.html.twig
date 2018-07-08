@@ -1,0 +1,107 @@
+{% extends "dswAmpliBundle::layout2.html.twig" %}
+{% block title %}{{ parent() }} - {{ user.username }}{% endblock %}
+{% block dsw_ampli_jumbotron %}{% endblock %}
+
+{% block dsw_ampli_content %}
+<div class="container my-5">
+   
+    <div class="row idee_page">
+    <div class="col-lg-8 mx-auto">
+    <div class="card idee">
+    
+        <img class="card-img img-fluid cover_300 pos_a" src="{{ asset('bundles/dswampli/img/utilisateur.png') }}" alt="Image user">
+        
+        <div class="text_protection_top cover_300"></div>
+        
+        <div class="card-img-overlay text_protected cover_300">
+            {% if user.lastname is defined %}
+                <p class="titre_idee mb-3">{{ user.firstname }} {{ user.lastname }}</p>
+            {% else %}
+                <p class="titre_idee mb-3">{{ user.username }}</p>
+            {% endif %}
+        </div>
+        
+        
+        <div class="card-body">
+            
+            {% if user == app.user or is_granted('ROLE_ADMIN') %}
+            <h4 class="card-title">Informations visibles sur votre fiche publique</h4>
+            {% endif %}
+            
+            <p class="card-text mb-1">Nom d'utilisateur : {{ user.username }}</p>
+            <p class="card-text mb-1">Nombre d'idées crées : {{ idees|length }}</p>
+            <p class="card-text">Nombre d'idées aimées : {{ likes|length }}</p>
+
+        </div>
+        
+        {# Partie privée #}
+        {% if user == app.user or is_granted('ROLE_ADMIN') %}
+        
+        <hr class="hr_thin">
+        <div class="card-body">
+            
+            <h4 class="card-title">Informations personnelles</h4>
+            <p class="card-text mb-1">Email : {{ user.email }}</p>
+            <p class="card-text mb-1">Dernière connexion : {{ user.lastLogin|date("d/m/y \\à G:i") }}</p>
+            
+            <p class="card-text">
+            {% if user.roles %}
+            {% for role in user.roles %}
+                {{ role }} 
+            {% endfor %}
+            {% endif %}
+            </p>
+            
+            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-outline-primary mt-2">Modifier le profil</a>
+            <a href="{{ path('fos_user_change_password') }}" class="btn btn-outline-primary mt-2">Changer de mot de passe</a>
+            
+            
+        </div>
+        
+        <hr class="hr_thin">
+        <div class="card-body">
+            
+            <h4 class="card-title">Idées proposées</h4>
+            
+            {% if idees %}
+            {% for idee in idees %}
+                <a href="{{ path('ampli_idee_show', {'id': idee.id}) }}" class="mb-1">{{ idee.titre }}</a><br>
+            {% endfor %}
+            {% endif %}
+            
+        </div>
+        
+        <hr class="hr_thin">
+        <div class="card-body">
+            
+            <h4 class="card-title">Idées aimées</h4>
+            
+            {% if likes %}
+            {% for like in likes %}
+                <a href="{{ path('ampli_idee_show', {'id': like.idee.id}) }}" class="mb-1">{{ like.idee.titre }}</a><br>
+            {% endfor %}
+            {% endif %}
+            
+        </div> 
+        
+        {% endif %}
+        
+
+    
+    </div>
+    
+
+    
+    
+    </div>
+    </div>
+    
+</div>
+{% endblock %}
+
+
+
+
+
+    
+

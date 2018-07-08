@@ -1,0 +1,25 @@
+{% extends 'dswCoreBundle::layout.html.twig' %}
+
+{% block body %}
+<div class="container my-5">
+   
+    <h1>Record creation</h1>
+
+    {{ form_start(form) }}
+       
+        HOY
+        {{ form_row(form.points, { 'attr': {'min': 0, 'max': 6, 'step': 2} }) }}
+       
+        {{ form_widget(form) }}
+        
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('eval_record_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    
+</div>
+{% endblock %}

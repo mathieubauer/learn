@@ -1,0 +1,36 @@
+{% extends "dswQuizBundle::layout.html.twig" %}
+
+{% block dsw_quiz_content %}
+<div class="container my-5">
+   
+    <h1>Édition de question</h1>
+
+    {{ form_start(edit_form) }}
+       
+        {{ form_widget(edit_form.questionnaire) }}
+        {{ form_widget(edit_form.intitule) }}
+        
+        {% for answer in edit_form.answers %}
+        
+            <h3 class="mt-4">Réponse {{ loop.index }}</h3>
+            {{ form_widget(answer) }}
+        
+        {% endfor %}
+        
+        {{ form_widget(edit_form) }}
+        
+        <input type="submit" value="Éditer la question" class="btn btn-primary mt-3" />
+        
+    {{ form_end(edit_form) }}
+    
+    
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Supprimer la question" class="btn btn-tertiary mt-3">
+    {{ form_end(delete_form) }}
+    
+    <!-- <a href="{{ path('quiz_question_index') }}" class="btn btn-secondary mt-3">Liste des questions</a> -->
+    
+    <a href="{{ path('quiz_questionnaire_show', { 'id': question.questionnaire.id }) }}" class="btn btn-secondary mt-3">Retour au questionnaire</a>
+    
+</div>    
+{% endblock %}

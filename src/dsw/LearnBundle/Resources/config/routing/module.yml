@@ -1,0 +1,61 @@
+module_index:
+    path:     /
+    defaults: { _controller: "dswLearnBundle:Module:index" }
+    methods:  GET
+
+module_show:
+    path:     /{id}/show
+    defaults: { _controller: "dswLearnBundle:Module:show" }
+    methods:  GET
+
+module_new:
+    path:     /new
+    defaults: { _controller: "dswLearnBundle:Module:new" }
+    methods:  [GET, POST]
+
+module_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "dswLearnBundle:Module:edit" }
+    methods:  [GET, POST]
+
+module_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "dswLearnBundle:Module:delete" }
+    methods:  [GET, DELETE]
+    
+
+module_create:
+    path:     /{id}/create
+    defaults: { _controller: "dswLearnBundle:Module:create" }
+    methods:  [GET, POST]
+    
+module_create_title:
+    path:     /{id}/create_titre
+    defaults: { _controller: "dswLearnBundle:Module:create_title" }
+    methods:  [GET, POST]
+    
+module_build:
+    path:     /{id}/build
+    defaults: { _controller: "dswLearnBundle:Module:build" }
+    methods:  [GET, POST]
+    
+module_play:
+    path:     /{id}
+    defaults: { _controller: "dswLearnBundle:Module:play" }
+    methods:  [GET, POST]
+    
+module_login:
+    path:     /login/{id}
+    defaults: { _controller: "dswLearnBundle:Module:loginAndPlay" }
+    methods:  GET
+    
+    
+module_up:
+    path:     /{id}/up
+    defaults: { _controller: "dswLearnBundle:Module:up" }
+    methods:  [GET, POST]
+    
+module_down:
+    path:     /{id}/down
+    defaults: { _controller: "dswLearnBundle:Module:down" }
+    methods:  [GET, POST]

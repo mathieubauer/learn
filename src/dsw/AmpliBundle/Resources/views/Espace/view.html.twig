@@ -1,0 +1,59 @@
+{% extends "dswAmpliBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Choix de l'étape{% endblock %}
+{% block dsw_ampli_jumbotron %}
+    <h1>{{ espace.titre }}</h1>
+    <h2 class="soustitre mb-0">Quelle sera votre contribution ?</h2>
+{% endblock %}
+
+{% block dsw_ampli_content %}
+   
+    <div class="row no-gutters">
+
+        <!-- <div class="col-md-3 col-6">
+            <a href="{{ path('ampli_idee_new', {'id': espace.id}) }}">
+            <div class="vcard text-center chiaro" >
+                <i class="fa fa-microphone" aria-hidden="true"></i>
+                <div class="card-block">
+                    <h3 class="card-title">1. Proposer</h3>
+                </div>
+            </div>
+            </a>
+        </div> -->
+
+        <div class="col-md-4 col-12">
+            <a href="{{ path('dsw_ampli_vote', {'id': espace.id}) }}">
+            <div class="vcard text-center oscuro" >
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <div class="card-block">
+                    <h3 class="card-title">Inventer</h3>
+                </div>
+            </div>
+            </a>
+        </div>
+
+
+        <div class="col-md-4 col-12">
+            <a href="{{ path('dsw_ampli_develop', {'id': espace.id}) }}">
+            <div class="vcard text-center chiaro" >
+                <i class="fa fa-cog" aria-hidden="true"></i>
+                <div class="card-block">
+                    <h3 class="card-title">Développer</h3>
+                </div>
+            </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 col-12">
+            <a href="{{ path('dsw_ampli_propulse', {'id': espace.id}) }}">
+            <div class="vcard text-center oscuro" >
+                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                <div class="card-block">
+                    <h3 class="card-title">Propulser</h3>
+                </div>
+            </div>
+            </a>
+        </div>
+
+    </div>
+    
+{% endblock %}

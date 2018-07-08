@@ -1,0 +1,39 @@
+{% extends 'dswCoreBundle::base.html.twig' %}
+{% form_theme form 'form/fields.html.twig' %}
+
+{% block body %}
+<div class="container-fluid my-md-5 my-3">
+  
+<div class="panel_gauche"></div>
+<div class="panel_droite"></div>
+  
+    <div class="row justify-content-around">
+  
+        <div class="col-md-4 blanc">
+            <div class="card">
+            <div class="card-body">
+            <h1 class="question mb-0">{{ question.intitule }}</h1>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+           
+            {{ form_start(form, {'attr': {'class': 'form-horizontal container_reponses'}}) }}
+
+                <div class="btn-groupz" data-toggle="buttons">
+                {{ form_widget(form.answer) }}
+                </div>
+                
+                <div class="text-center">
+                <input type="submit" value="Valider" class="btn btn-primary"/>
+                </div>
+
+            {{ form_end(form) }}
+            
+        </div>
+    
+    </div>
+    
+</div>
+{% endblock %}

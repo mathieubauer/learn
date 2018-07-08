@@ -1,0 +1,71 @@
+{% extends "dswLearnBundle::layout.html.twig" %}
+{% block title %}{{ parent() }} - Édition{% endblock %}
+{% block dsw_learn_content %}
+  
+    <div class="row justify-content-center">
+    <div class="col-md-8">
+   
+    <h1>Éditer une ressource</h1>
+    
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+        <a href="{{ path('course_play', {'id': unit.module.course.id }) }}">{{ unit.module.course.name }}</a>
+        </li>
+        <li class="breadcrumb-item">
+        <a href="{{ path('module_play', {'id': unit.module.id }) }}">{{ unit.module.name }}</a>
+        </li>
+        {% if unit.name is defined %}
+        <li class="breadcrumb-item active" aria-current="page">
+        {{ unit.name }}
+        </li>
+        {% endif %}
+    </ol>
+    </nav>
+    
+    {{ form_start(edit_form) }}
+    
+        {{ form_errors(edit_form) }}
+        
+        {#
+        <div class="mb-3">
+        {{ form_label(edit_form.module) }}
+        {{ form_widget(edit_form.module) }}
+        </div>
+        #}
+        
+        {% if edit_form.name is defined %}
+        <div class="mb-1"><strong>Titre de la ressource</strong></div>
+        <div class="mb-3">{{ form_widget(edit_form.name) }}</div>
+        {% endif %}
+        
+        <div class="mb-1"><strong>Contenu</strong></div>
+        <div class="mb-3 typo_code">{{ form_widget(edit_form.content) }}</div>
+        
+        {% if edit_form.type is defined %}
+        <div class="mb-1"><strong>Type</strong></div>
+        <div class="mb-3">{{ form_widget(edit_form.type) }}</div>
+        {% endif %}
+        
+        {% if edit_form.imageFile is defined %}
+        <div class="mb-1"><strong>Fichier</strong></div>
+        <div class="mb-3">{{ form_widget(edit_form.imageFile) }}</div>
+        {% endif %}
+        
+        
+        <a href="{{ path('module_build', {'id': unit.module.id }) }}" class="btn btn-dark mb-3">Annuler</a>
+        <button class="btn btn-learn mb-3" type="submit">Enregistrer les modifications</button>
+        
+    {{ form_end(edit_form) }}
+    
+    {% if is_granted('ROLE_ADMIN') %}
+        <hr>
+        <h3>Administrateur</h3>
+        <a href="{{ path('unit_index') }}" class="btn btn-learn mb-3">Retour à la liste</a>
+        <a href="{{ path('unit_delete', {'id': unit.id }) }}" class="btn btn-danger mb-3">Supprimer l'unité</a>
+    {% endif %}    
+    
+    </div>
+    </div>
+    
+{% endblock %}

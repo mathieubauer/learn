@@ -1,0 +1,26 @@
+dsw_user_index:
+    path:     /
+    defaults: { _controller: dswUserBundle:User:index }
+    
+dsw_user_view:
+    path:      /{id}
+    defaults: { _controller: dswUserBundle:User:view }
+    requirements:
+        id: \d+
+        
+dsw_user_edit:
+    path:      /edit/{id}
+    defaults: { _controller: dswUserBundle:User:edit }
+    requirements:
+        id: \d+
+        
+dsw_user_delete:
+    path:      /delete/{id}
+    defaults: { _controller: dswUserBundle:User:delete }
+    requirements:
+        id: \d+
+        
+
+dsw_user_email:
+    path:     /login/email
+    defaults: { _controller: dswUserBundle:User:email }
